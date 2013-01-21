@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+[platform=ios formFactor=headheld]
+]]></content>
+
+<tabTrigger>iphone</tabTrigger>
+<scope>meta.selector.tss</scope>
+</snippet>

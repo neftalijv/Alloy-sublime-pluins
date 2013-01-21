@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+[platform=ios formFactor=tablet]
+]]></content>
+<tabTrigger>ipad</tabTrigger>
+<scope>meta.selector.tss</scope>
+</snippet>

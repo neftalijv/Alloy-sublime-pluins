@@ -1,0 +1,652 @@
+{
+    "comment": "", 
+    "fileTypes": [
+        "tss", "TSS"
+    ], 
+    "foldingStartMarker": "/\\*\\*(?!\\*)|\\{\\s*($|/\\*(?!.*?\\*/.*\\S))", 
+    "foldingStopMarker": "(?<!\\*)\\*\\*/|^\\s*\\}", 
+    "keyEquivalent": "^~C", 
+    "name": "TSS", 
+    "patterns": [
+        { 
+            "include": "#comment-line"
+        },
+        {
+            "include": "#comment-block"
+        },
+        { 
+            "include": "#selector"
+        }, 
+        {
+            "begin": "\\s*((@)charset\\b)\\s*", 
+            "captures": {
+                "1": {
+                    "name": "keyword.control.at-rule.charset.tss"
+                }, 
+                "2": {
+                    "name": "punctuation.definition.keyword.tss"
+                }
+            }, 
+            "end": "\\s*((?=;|$))", 
+            "name": "meta.at-rule.charset.tss", 
+            "patterns": [
+                {
+                    "include": "#string-double"
+                }, 
+                {
+                    "include": "#string-single"
+                }
+            ]
+        }, 
+        {
+            "begin": "\\s*((@)import\\b)\\s*", 
+            "captures": {
+                "1": {
+                    "name": "keyword.control.at-rule.import.tss"
+                }, 
+                "2": {
+                    "name": "punctuation.definition.keyword.tss"
+                }
+            }, 
+            "end": "\\s*((?=;|\\}))", 
+            "name": "meta.at-rule.import.tss", 
+            "patterns": [
+                {
+                    "include": "#string-double"
+                }, 
+                {
+                    "include": "#string-single"
+                }, 
+                {
+                    "begin": "\\s*(url)\\s*(\\()\\s*", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "support.function.url.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "end": "\\s*(\\))\\s*", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "patterns": [
+                        {
+                            "match": "[^'\") \\t]+", 
+                            "name": "variable.parameter.url.tss"
+                        }, 
+                        {
+                            "include": "#string-single"
+                        }, 
+                        {
+                            "include": "#string-double"
+                        }
+                    ]
+                }, 
+                {
+                    "include": "#media-query-list"
+                }
+            ]
+        }, 
+        {
+            "begin": "^\\s*((@)font-face)\\s*(?=\\{)", 
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.at-rule.font-face.tss"
+                }, 
+                "2": {
+                    "name": "punctuation.definition.keyword.tss"
+                }
+            }, 
+            "end": "\\s*(\\})", 
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.property-list.tss"
+                }
+            }, 
+            "name": "meta.at-rule.font-face.tss", 
+            "patterns": [
+                {
+                    "include": "#rule-list"
+                }
+            ]
+        }, 
+        {
+            "begin": "(?=^\\s*@media\\s*.*?\\{)", 
+            "end": "\\s*(\\})", 
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.property-list.tss"
+                }
+            }, 
+            "patterns": [
+                {
+                    "begin": "^\\s*((@)media)(?=.*?\\{)", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.control.at-rule.media.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.definition.keyword.tss"
+                        }, 
+                        "3": {
+                            "name": "support.constant.media.tss"
+                        }
+                    }, 
+                    "end": "\\s*(?=\\{)", 
+                    "name": "meta.at-rule.media.tss", 
+                    "patterns": [
+                        {
+                            "include": "#media-query-list"
+                        }
+                    ]
+                }, 
+                {
+                    "begin": "\\s*(\\{)", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.section.property-list.tss"
+                        }
+                    }, 
+                    "end": "(?=\\})", 
+                    "patterns": [
+                        {
+                            "include": "$self"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        {
+            "begin": "(?=\\{)", 
+            "end": "\\}", 
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.section.property-list.tss"
+                }
+            }, 
+            "patterns": [
+                {
+                    "include": "#rule-list"
+                }
+            ]
+        }
+    ], 
+    "repository": {
+        "color-values": {
+            "patterns": [
+                {
+                    "comment": "http://www.w3.org/TR/CSS21/syndata.html#value-def-color", 
+                    "match": "\\b(L\\(('.*'(,? *))\\)+)\\b", 
+                    "name": "support.constant.color.w3c-standard-color-name.tss"
+                }, 
+                {
+                    "comment": "These colours are mostly recognised but will not validate. ref: http://www.w3schools.com/css/css_colornames.asp", 
+                    "match": "\\b(Ti.Filesystem.File.executable|Ti.Filesystem.File.name|Ti.Android.STREAM_RING|Ti.Platform.BATTERY_STATE_CHARGING|Ti.XML.Document.previousSibling|Ti.XML.DocumentType.publicId|Ti.XML.Node.TEXT_NODE|Ti.UI.BLEND_MODE_OVERLAY|Ti.Media.AudioPlayer.idle|Ti.UI.FACE_DOWN|Ti.XML.Attr.ownerDocument|Ti.UI.TEXT_ALIGNMENT_LEFT|Ti.Android.Calendar.Alert.end|Ti.Platform.manufacturer|Ti.Geolocation.hasCompass|Ti.XML.Element.ENTITY_NODE|Ti.XML.DocumentType.systemId|Ti.Facebook.BUTTON_STYLE_NORMAL|Ti.Android.DEFAULT_ALL|Ti.Android.FILL_IN_COMPONENT|Ti.Android.ACTION_INSERT_OR_EDIT|Ti.Android.R.string|Ti.Android.RESULT_FIRST_USER|Ti.XML.EntityReference.PROCESSING_INSTRUCTION_NODE|Ti.UI.Switch.animatedCenter|Ti.XML.Element.namespaceURI|Ti.Media.AUDIO_FORMAT_ALAW|Ti.Android.Calendar.allCalendars|Ti.Android.ACTION_POWER_CONNECTED|Ti.UI.BLEND_MODE_COLOR|Ti.Event.type|Ti.Cloud.expiresIn|Ti.UI.iPhone.SystemButton.SPINNER|Ti.Media.VIDEO_REPEAT_MODE_NONE|Ti.XML.DocumentFragment.parentNode|Ti.Android.ACTION_MAIN|Ti.XML.Document.namespaceURI|Ti.Android.CATEGORY_MONKEY|Ti.XML.Entity.firstChild|Ti.UI.EmailDialog.FAILED|Ti.XML.Node.ENTITY_NODE|Ti.XML.CDATASection.nodeType|Ti.Filesystem.applicationSupportDirectory|Ti.UI.iOS.BLEND_MODE_MULTIPLY|Ti.UI.DashboardView.size|Ti.UI.SearchBar.animatedCenter|Ti.Media.MUSIC_MEDIA_GROUP_ALBUM|Ti.XML.Attr.specified|Ti.Android.ACTION_PACKAGE_ADDED|Ti.Android.ACTION_BATTERY_LOW|Ti.XML.Node.NOTATION_NODE|Ti.UI.iPhone.SystemButton.TRASH|Ti.UI.iPhone.AlertDialogStyle.LOGIN_AND_PASSWORD_INPUT|Ti.Network.Socket.LISTENING|Ti.Android.CATEGORY_DEFAULT|Ti.UI.iOS.BLEND_MODE_LUMINOSITY|Ti.Media.VIDEO_LOAD_STATE_UNKNOWN|Ti.XML.DocumentType.DOCUMENT_NODE|Ti.XML.EntityReference.ENTITY_NODE|Ti.Network.NOTIFICATION_TYPE_NEWSSTAND|Ti.Media.AUDIO_LINEOUT|Ti.Network.TLS_VERSION_1_0|Ti.Network.TLS_VERSION_1_1|Ti.XML.Document.DOCUMENT_NODE|Ti.Blob.size|Ti.Android.Intent.type|Ti.UI.iOS.BLEND_MODE_SATURATION|Ti.Media.VIDEO_MEDIA_TYPE_AUDIO|Ti.XML.Text.ATTRIBUTE_NODE|Ti.Android.Calendar.Event.hasAlarm|Ti.UI.TextField.children|Ti.XML.Entity.childNodes|Ti.UI.TEXT_AUTOCAPITALIZATION_NONE|Ti.Android.Notification.contentView|Ti.UI.CoverFlowView.animatedCenter|Ti.Android.SCREEN_ORIENTATION_LANDSCAPE|Ti.UI.Android.PIXEL_FORMAT_RGBA_5551|Ti.UI.RETURNKEY_SEARCH|Ti.XML.Text.NOTATION_NODE|Ti.Platform.displayCaps|Ti.UI.Android.SOFT_KEYBOARD_DEFAULT_ON_FOCUS|Ti.Android.ACTION_NEW_OUTGOING_CALL|Ti.Codec.TYPE_SHORT|Ti.Contacts.Person.prefix|Ti.UI.iPhone.ActivityIndicatorStyle.PLAIN|Ti.UI.ImageView.children|Ti.Android.EXTRA_DONT_KILL_APP|Ti.Filesystem.MODE_READ|Ti.UI.iPhone.SystemIcon.HISTORY|Ti.UI.Android.PIXEL_FORMAT_UNKNOWN|Ti.UI.PickerColumn.animatedCenter|Ti.UI.iPhone.TableViewSeparatorStyle.NONE|Ti.XML.CDATASection.firstChild|Ti.XML.CDATASection.DOCUMENT_NODE|Ti.Android.CATEGORY_UNIT_TEST|Ti.Geolocation.locationServicesEnabled|Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION|Ti.Media.AUDIO_HEADPHONES_AND_MIC|Ti.Media.AUDIO_FILEFORMAT_AMR|Ti.Media.AUDIO_FILEFORMAT_CAF|Ti.UI.BLEND_MODE_MULTIPLY|Ti.Media.VIDEO_SCALING_NONE|Ti.Geolocation.AUTHORIZATION_DENIED|Ti.UI.iPhone.SystemButton.FIXED_SPACE|Ti.UI.ProgressBar.animatedCenter|Ti.Media.VideoPlayer.animatedCenter|Ti.UI.iPhone.SystemButton.CONTACT_ADD|Ti.UI.NOTIFICATION_DURATION_SHORT|Ti.Android.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS|Ti.UI.iPad.Popover.animatedCenter|Ti.Android.Calendar.Event.title|Ti.XML.Comment.ATTRIBUTE_NODE|Ti.UI.ImageView.rect|Ti.Android.ACTION_SEND_MULTIPLE|Ti.XML.DocumentFragment.DOCUMENT_FRAGMENT_NODE|Ti.UI.Android.SearchView.size|Ti.Media.MUSIC_PLAYER_REPEAT_DEFAULT|Ti.XML.Document.CDATA_SECTION_NODE|Ti.XML.DocumentType.CDATA_SECTION_NODE|Ti.UI.Android.SOFT_INPUT_ADJUST_UNSPECIFIED|Ti.Filesystem.File.writeable|Ti.UI.Tab.size|Ti.XML.DocumentType.childNodes|Ti.XML.Element.ENTITY_REFERENCE_NODE|Ti.Android.ACTION_GTALK_SERVICE_DISCONNECTED|Ti.Media.AudioPlayer.STATE_WAITING_FOR_QUEUE|Ti.UI.iPhone.SystemButton.SAVE|Ti.XML.Element.NOTATION_NODE|Ti.Android.PENDING_INTENT_MAX_VALUE|Ti.Android.ACTION_ANSWER|Ti.UI.Label.size|Ti.UI.Toolbar.children|Ti.Android.ACTION_SEND|Ti.UI.RETURNKEY_GOOGLE|Ti.Android.FLAG_ACTIVITY_CLEAR_TOP|Ti.UI.BLEND_MODE_DESTINATION_OVER|Ti.XML.Node.DOCUMENT_TYPE_NODE|Ti.UI.iPhone.MODAL_TRANSITION_STYLE_FLIP_HORIZONTAL|Ti.XML.Entity.COMMENT_NODE|Ti.Android.EXTRA_BCC|Ti.UI.Toolbar.rect|Ti.Network.HTTPClient.location|Ti.XML.Comment.length|Ti.Platform.batteryState|Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW|Ti.Contacts.CONTACTS_SORT_FIRST_NAME|Ti.Android.ACTION_RUN|Ti.Media.VideoPlayer.rect|Ti.UI.CoverFlowView.rect|Ti.UI.iOS.WEBVIEW_NAVIGATIONTYPE_FORM_SUBMITTED|Ti.UI.KEYBOARD_URL|Ti.Android.FLAG_SHOW_LIGHTS|Ti.Android.ACTION_WALLPAPER_CHANGED|Ti.Android.EXTRA_DATA_REMOVED|Ti.UI.iPhone.RowAnimationStyle.NONE|Ti.UI.PickerColumn.children|Ti.Platform.BATTERY_STATE_FULL|Ti.Media.peakMicrophonePower|Ti.UI.iPhone.MODAL_PRESENTATION_PAGESHEET|Ti.UI.TabGroup.rect|Ti.XML.Node.ENTITY_REFERENCE_NODE|Ti.Geolocation.ERROR_REGION_MONITORING_FAILURE|Ti.UI.iPhone.TableViewCellSelectionStyle.GRAY|Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE|Ti.Android.RESULT_CANCELED|Ti.Platform.Android.API_LEVEL|Ti.Media.VIDEO_CONTROL_FULLSCREEN|Ti.XML.CharacterData.childNodes|Ti.XML.Element.ELEMENT_NODE|Ti.UI.URL_ERROR_UNSUPPORTED_SCHEME|Ti.Android.EXTRA_EMAIL|Ti.Android.CATEGORY_OPENABLE|Ti.Blob.nativePath|Ti.Geolocation.AUTHORIZATION_UNKNOWN|Ti.UI.BLEND_MODE_SCREEN|Ti.Android.Calendar.Event.reminders|Ti.Codec.LITTLE_ENDIAN|Ti.Android.ACTION_USER_PRESENT|Ti.XML.Element.nodeType|Ti.UI.URL_ERROR_HOST_LOOKUP|Ti.UI.iOS.TabbedBar.size|Ti.XML.Node.previousSibling|Ti.XML.EntityReference.ATTRIBUTE_NODE|Ti.XML.CharacterData.ELEMENT_NODE|Ti.UI.iPhone.TableViewScrollPosition.TOP|Ti.Android.Menu.items|Ti.Platform.availableMemory|Ti.Android.STREAM_MUSIC|Ti.XML.CDATASection.ENTITY_NODE|Ti.Android.Calendar.Alert.alarmTime|Ti.XML.Document.documentElement|Ti.Media.VIDEO_MEDIA_TYPE_NONE|Ti.Geolocation.ACCURACY_KILOMETER|Ti.Android.ACTION_PACKAGE_INSTALL|Ti.Android.ACTION_DATE_CHANGED|Ti.UI.AUTODETECT_PHONE|Ti.Filesystem.applicationCacheDirectory|Ti.XML.Attr.COMMENT_NODE|Ti.Filesystem.File.writable|Ti.Network.HTTPClient.responseText|Ti.Filesystem.separator|Ti.Android.ACTION_MEDIA_UNMOUNTED|Ti.Media.AUDIO_FILEFORMAT_3GPP|Ti.UI.iPhone.SystemIcon.MOST_VIEWED|Ti.UI.Button.children|Ti.UI.iPhone.SystemButton.ADD|Ti.Android.FILL_IN_ACTION|Ti.Media.AudioPlayer.STATE_INITIALIZED|Ti.UI.ANIMATION_CURVE_LINEAR|Ti.XML.Comment.previousSibling|Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_LARGE|Ti.Database.ResultSet.validRow|Ti.App.name|Ti.UI.MaskedImage.children|Ti.Media.AUDIO_FORMAT_LINEAR_PCM|Ti.Media.Item.albumArtist|Ti.XML.CDATASection.DOCUMENT_TYPE_NODE|Ti.UI.iPhone.AlertDialogStyle.SECURE_TEXT_INPUT|Ti.Media.VideoPlayer.playbackState|Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT|Ti.Android.SHOW_AS_ACTION_ALWAYS|Ti.UI.iPhone.SystemIcon.FEATURED|Ti.Android.Calendar.METHOD_DEFAULT|Ti.Android.ACTION_MEDIA_BUTTON|Ti.Media.VIDEO_PLAYBACK_STATE_PAUSED|Ti.Platform.Android.physicalSizeCategory|Ti.XML.Document.lastChild|Ti.Android.SCREEN_ORIENTATION_USER|Ti.Media.VIDEO_CONTROL_EMBEDDED|Ti.UI.iOS.AUTODETECT_ALL|Ti.Android.EXTRA_TEXT|Ti.Media.AUDIO_UNKNOWN|Ti.Media.Item.lyrics|Ti.XML.Entity.nodeType|Ti.UI.RETURNKEY_NEXT|Ti.XML.CharacterData.text|Ti.Filesystem.MODE_WRITE|Ti.XML.DocumentType.nodeName|Ti.XML.Text.text|Ti.Android.ACTION_ALL_APPS|Ti.UI.ButtonBar.size|Ti.UI.ButtonBar.animatedCenter|Ti.Contacts.contactsAuthorization|Ti.Map.ANNOTATION_RED|Ti.XML.NodeList.length|Ti.UI.iPhone.SystemButtonStyle.PLAIN|Ti.Android.EXTRA_CC|Ti.UI.ActivityIndicatorStyle.PLAIN|Ti.XML.DocumentType.internalSubset|Ti.Android.CATEGORY_PREFERENCE|Ti.Android.FLAG_ACTIVITY_SINGLE_TOP|Ti.Media.AUDIO_FILEFORMAT_MP4A|Ti.Media.AUDIO_FORMAT_IMA4|Ti.Android.ACTION_TIME_TICK|Ti.Facebook.LoginButton.size|Ti.UI.iOS.ANIMATION_CURVE_EASE_OUT|Ti.Database.DB.file|Ti.XML.Comment.ENTITY_REFERENCE_NODE|Ti.Locale.currentCountry|Ti.Android.NotificationManager.STREAM_DEFAULT|Ti.UI.RETURNKEY_SEND|Ti.UI.MobileWeb.TableViewSeparatorStyle.SINGLE_LINE|Ti.UI.ScrollableView.children|Ti.Android.ActionBar.logo|Ti.UI.SIZE|Ti.UI.Android.SWITCH_STYLE_TOGGLEBUTTON|Ti.Media.appMusicPlayer|Ti.UI.Android.PIXEL_FORMAT_OPAQUE|Ti.UI.iPhone.MODAL_TRANSITION_STYLE_PARTIAL_CURL|Ti.Network.SOCKET_INITIALIZED|Ti.App.copyright|Ti.Android.PENDING_INTENT_FOR_ACTIVITY|Ti.UI.Label.children|Ti.UI.ANIMATION_CURVE_EASE_OUT|Ti.UI.WebView.size|Ti.Geolocation.ERROR_TIMEOUT|Ti.Android.ACTION_PACKAGE_REMOVED|Ti.Android.R.drawable|Ti.UI.TabbedBar.children|Ti.UI.iOS.BLEND_MODE_HARD_LIGHT|Ti.UI.Android.PIXEL_FORMAT_RGB_888|Ti.XML.DocumentType.previousSibling|Ti.Network.Socket.ERROR|Ti.UI.Android.PIXEL_FORMAT_RGBA_4444|Ti.UI.iPad.DocumentViewer.rect|Ti.XML.Document.TEXT_NODE|Ti.UI.RETURNKEY_GO|Ti.Android.FILL_IN_CATEGORIES|Ti.Android.Calendar.Event.hasExtendedProperties|Ti.Android.FLAG_ACTIVITY_PREVIOUS_IS_TOP|Ti.XML.Document.text|Ti.Map.View.latitudeDelta|Ti.UI.iPhone.SystemButtonStyle.BAR|Ti.UI.Android.PROGRESS_INDICATOR_STATUS_BAR|Ti.Android.R.id|Ti.UI.iOS.AUTODETECT_NONE|Ti.XML.DocumentFragment.ownerDocument|Ti.UI.AUTODETECT_CALENDAR|Ti.UI.Toolbar.animatedCenter|Ti.XML.DocumentType.ENTITY_NODE|Ti.Platform.locale|Ti.Map.ANNOTATION_DRAG_STATE_END|Ti.Android.Calendar.Calendar.name|Ti.UI.iPhone.SystemButtonStyle.DONE|Ti.Android.Calendar.VISIBILITY_CONFIDENTIAL|Ti.UI.BLEND_MODE_SOFT_LIGHT|Ti.UI.iPhone.SystemIcon.BOOKMARKS|Ti.Android.EXTRA_PHONE_NUMBER|Ti.Media.MUSIC_MEDIA_GROUP_TITLE|Ti.Database.FIELD_TYPE_STRING|Ti.UI.Android.WEBVIEW_PLUGINS_OFF|Ti.Media.audioLineType|Ti.XML.Element.nextSibling|Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_UNDEFINED|Ti.UI.Slider.size|Ti.Network.HTTPClient.DONE|Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES|Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT|Ti.Android.Calendar.Alert.minutes|Ti.Media.Item.isCompilation|Ti.UI.iPhone.SystemButton.EDIT|Ti.Gesture.orientation|Ti.UI.WebView.animatedCenter|Ti.Media.DEVICE_BUSY|Ti.Media.VideoPlayer.loadState|Ti.Media.QUALITY_LOW|Ti.Android.FLAG_ONE_SHOT|Ti.XML.Entity.ELEMENT_NODE|Ti.XML.Comment.CDATA_SECTION_NODE|Ti.UI.MaskedImage.rect|Ti.XML.EntityReference.ENTITY_REFERENCE_NODE|Ti.UI.BLEND_MODE_EXCLUSION|Ti.Android.FLAG_ACTIVITY_BROUGHT_TO_FRONT|Ti.UI.DashboardView.rect|Ti.UI.TabbedBar.animatedCenter|Ti.XML.DocumentFragment.PROCESSING_INSTRUCTION_NODE|Ti.Media.MUSIC_PLAYER_STATE_STOPPED|Ti.UI.iOS.AdView.rect|Ti.UI.iPad.Popover.size|Ti.Android.Calendar.VISIBILITY_PUBLIC|Ti.Database.ResultSet.fieldCount|Ti.UI.iPhone.MODAL_TRANSITION_STYLE_COVER_VERTICAL|Ti.Android.ACTION_MEDIA_MOUNTED|Ti.UI.ScrollView.rect|Ti.UI.iPhone.ProgressBarStyle.BAR|Ti.UI.Android.LINKIFY_MAP_ADDRESSES|Ti.UI.BLEND_MODE_SATURATION|Ti.UI.iOS.BLEND_MODE_PLUS_LIGHTER|Ti.Media.VIDEO_PLAYBACK_STATE_INTERRUPTED|Ti.Platform.address|Ti.Android.FLAG_UPDATE_CURRENT|Ti.XML.DocumentType.ENTITY_REFERENCE_NODE|Ti.Android.MenuItem.itemId|Ti.XML.CharacterData.CDATA_SECTION_NODE|Ti.XML.Attr.firstChild|Ti.Media.VIDEO_SCALING_ASPECT_FILL|Ti.UI.iOS.DocumentViewer.rect|Ti.UI.Android.PIXEL_FORMAT_RGBX_8888|Ti.XML.CharacterData.attributes|Ti.XML.Text.previousSibling|Ti.XML.EntityReference.CDATA_SECTION_NODE|Ti.XML.Document.attributes|Ti.Geolocation.ERROR_DENIED|Ti.Filesystem.File.nativePath|Ti.XML.Attr.CDATA_SECTION_NODE|Ti.Network.HTTPClient.responseXML|Ti.Android.R.layout|Ti.Network.TLS_VERSION_1_2|Ti.UI.URL_ERROR_BAD_URL|Ti.UI.Android.PIXEL_FORMAT_TRANSPARENT|Ti.UI.iPhone.ScrollIndicatorStyle.DEFAULT|Ti.UI.Window.animatedCenter|Ti.XML.Text.lastChild|Ti.XML.CharacterData.DOCUMENT_NODE|Ti.Media.Item.albumTitle|Ti.UI.Android.LINKIFY_ALL|Ti.XML.Element.DOCUMENT_TYPE_NODE|Ti.Media.AudioPlayer.STATE_WAITING_FOR_DATA|Ti.UI.iPad.POPOVER_ARROW_DIRECTION_UP|Ti.XML.Node.DOCUMENT_NODE|Ti.Media.systemMusicPlayer|Ti.XML.EntityReference.attributes|Ti.Android.ACTION_SEARCH|Ti.XML.DocumentType.name|Ti.XML.CDATASection.TEXT_NODE|Ti.XML.Comment.nextSibling|Ti.XML.CDATASection.namespaceURI|Ti.UI.TextField.rect|Ti.XML.Entity.TEXT_NODE|Ti.UI.iOS.BLEND_MODE_DESTINATION_OVER|Ti.UI.UNIT_CM|Ti.XML.Document.COMMENT_NODE|Ti.UI.iOS.COLOR_VIEW_FLIPSIDE_BACKGROUND|Ti.UI.KEYBOARD_NAMEPHONE_PAD|Ti.Event.source|Ti.UI.TextArea.animatedCenter|Ti.Media.AUDIO_FILEFORMAT_MP4|Ti.UI.PICKER_TYPE_COUNT_DOWN_TIMER|Ti.Contacts.Person.modified|Ti.XML.DocumentFragment.nodeName|Ti.XML.DocumentFragment.TEXT_NODE|Ti.Android.SCREEN_ORIENTATION_BEHIND|Ti.Android.CATEGORY_SELECTED_ALTERNATIVE|Ti.Android.SHOW_AS_ACTION_WITH_TEXT|Ti.XML.Entity.lastChild|Ti.UI.INPUT_BUTTONMODE_ALWAYS|Ti.UI.iPhone.RowAnimationStyle.LEFT|Ti.buildDate|Ti.Android.R.style|Ti.XML.Comment.DOCUMENT_NODE|Ti.UI.UNIT_MM|Ti.Android.EXTRA_ALARM_COUNT|Ti.Media.canRecord|Ti.Android.EXTRA_TITLE|Ti.XML.Comment.attributes|Ti.XML.NamedNodeMap.length|Ti.XML.Attr.ELEMENT_NODE|Ti.Android.ACTION_POWER_USAGE_SUMMARY|Ti.Contacts.CONTACTS_KIND_PERSON|Ti.XML.DocumentFragment.nodeType|Ti.XML.CharacterData.PROCESSING_INSTRUCTION_NODE|Ti.UI.TableViewSection.rowCount|Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT|Ti.XML.DocumentFragment.ENTITY_REFERENCE_NODE|Ti.Android.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY|Ti.Network.READ_WRITE_MODE|Ti.Media.MUSIC_PLAYER_SHUFFLE_NONE|Ti.UI.BLEND_MODE_NORMAL|Ti.XML.CharacterData.firstChild|Ti.UI.iOS.BLEND_MODE_SCREEN|Ti.XML.Text.nodeName|Ti.UI.iPad.POPOVER_ARROW_DIRECTION_UNKNOWN|Ti.Media.AUDIO_HEADPHONES|Ti.UI.Window.orientation|Ti.Media.MUSIC_MEDIA_TYPE_PODCAST|Ti.Android.ACTION_PACKAGE_CHANGED|Ti.Android.STREAM_ALARM|Ti.Blob.file|Ti.Media.AUDIO_SESSION_MODE_RECORD|Ti.Android.ACTION_BATTERY_OKAY|Ti.Contacts.AUTHORIZATION_DENIED|Ti.Android.CATEGORY_SAMPLE_CODE|Ti.XML.Comment.lastChild|Ti.Media.Item.albumTrackNumber|Ti.Media.AudioPlayer.playing|Ti.XML.DocumentType.lastChild|Ti.Network.HTTPClient.UNSENT|Ti.XML.Attr.DOCUMENT_FRAGMENT_NODE|Ti.Media.MUSIC_PLAYER_REPEAT_ALL|Ti.Platform.macaddress|Ti.XML.Comment.nodeName|Ti.Android.Calendar.Calendar.id|Ti.UI.iPhone.StatusBar.GRAY|Ti.Android.FLAG_ACTIVITY_NO_ANIMATION|Ti.Android.ACTION_SENDTO|Ti.UI.iOS.AUTODETECT_PHONE|Ti.Android.START_REDELIVER_INTENT|Ti.UI.URL_ERROR_TIMEOUT|Ti.UI.INHERIT|Ti.XML.CDATASection.PROCESSING_INSTRUCTION_NODE|Ti.Media.Item.playCount|Ti.XML.Attr.DOCUMENT_NODE|Ti.XML.Node.textContent|Ti.UI.BLEND_MODE_SOURCE_OUT|Ti.Android.ACTION_SCREEN_OFF|Ti.XML.Entity.previousSibling|Ti.UI.FILL|Ti.Blob.length|Ti.XML.DocumentType.DOCUMENT_TYPE_NODE|Ti.UI.INPUT_BORDERSTYLE_BEZEL|Ti.UI.ImageView.animating|Ti.XML.Node.nodeName|Ti.Android.ACTION_CLOSE_SYSTEM_DIALOGS|Ti.Media.Item.mediaType|Ti.UI.Slider.rect|Ti.Android.SHOW_AS_ACTION_IF_ROOM|Ti.UI.iPhone.SystemButton.PAUSE|Ti.XML.Comment.ownerDocument|Ti.Android.ACTION_PACKAGE_DATA_CLEARED|Ti.Media.AUDIO_SESSION_MODE_AMBIENT|Ti.Android.Calendar.METHOD_ALERT|Ti.Media.MUSIC_MEDIA_TYPE_ALL|Ti.XML.Element.DOCUMENT_NODE|Ti.UI.iPhone.SystemIcon.RECENTS|Ti.Network.Socket.INITIALIZED|Ti.UI.iPad.POPOVER_ARROW_DIRECTION_DOWN|Ti.Filesystem.MODE_APPEND|Ti.XML.Text.childNodes|Ti.UI.UNIT_DIP|Ti.UI.TEXT_ALIGNMENT_CENTER|Ti.Media.VIDEO_LOAD_STATE_PLAYABLE|Ti.UI.Android.LINKIFY_EMAIL_ADDRESSES|Ti.XML.DocumentFragment.DOCUMENT_NODE|Ti.Facebook.LoginButton.animatedCenter|Ti.Android.START_NOT_STICKY|Ti.UI.iPhone.SystemButton.COMPOSE|Ti.XML.Element.COMMENT_NODE|Ti.UI.KEYBOARD_NUMBER_PAD|Ti.Android.SCREEN_ORIENTATION_SENSOR|Ti.Android.Calendar.Alert.eventId|Ti.XML.ProcessingInstruction.target|Ti.UI.BLEND_MODE_DESTINATION_ATOP|Ti.Media.VIDEO_TIME_OPTION_NEAREST_KEYFRAME|Ti.XML.Entity.ENTITY_REFERENCE_NODE|Ti.UI.iPad.Popover.rect|Ti.XML.CDATASection.previousSibling|Ti.Media.AUDIO_FILEFORMAT_3GP2|Ti.UI.MaskedImage.size|Ti.UI.iPhone.SystemButton.BOOKMARKS|Ti.App.iOS.EVENT_ACCESSIBILITY_LAYOUT_CHANGED|Ti.Media.MUSIC_PLAYER_SHUFFLE_ALBUMS|Ti.Android.Calendar.Reminder.method|Ti.XML.Entity.notationName|Ti.UI.TableView.animatedCenter|Ti.XML.EntityReference.DOCUMENT_TYPE_NODE|Ti.Android.EXTRA_SHORTCUT_NAME|Ti.UI.iOS.BLEND_MODE_COPY|Ti.XML.CharacterData.ownerDocument|Ti.UI.iPhone.ProgressBarStyle.PLAIN|Ti.Android.ACTION_MEDIA_BAD_REMOVAL|Ti.XML.DocumentType.attributes|Ti.Android.ActionBar.onHomeIconItemSelected|Ti.UI.SearchBar.size|Ti.UI.Android.SOFT_INPUT_STATE_VISIBLE|Ti.Filesystem.externalStorageDirectory|Ti.UI.PICKER_TYPE_PLAIN|Ti.Media.VIDEO_CONTROL_HIDDEN|Ti.UI.Android.PROGRESS_INDICATOR_DETERMINANT|Ti.Network.online|Ti.XML.CharacterData.NOTATION_NODE|Ti.UI.iPhone.MODAL_TRANSITION_STYLE_CROSS_DISSOLVE|Ti.UI.Android.SOFT_INPUT_STATE_ALWAYS_VISIBLE|Ti.Platform.batteryLevel|Ti.Android.ACTION_UID_REMOVED|Ti.UI.BLEND_MODE_DESTINATION_IN|Ti.UI.iOS.CoverFlowView.children|Ti.Android.Calendar.Calendar.hidden|Ti.UI.iOS.AdView.children|Ti.UI.MaskedImage.animatedCenter|Ti.Android.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED|Ti.Media.QUALITY_HIGH|Ti.Network.HTTPClient.statusText|Ti.UI.EmailDialog.SAVED|Ti.UI.URL_ERROR_UNKNOWN|Ti.Media.Item.discCount|Ti.Network.HTTPClient.connected|Ti.Android.ActionBar.icon|Ti.UI.iOS.Toolbar.children|Ti.UI.AUTOLINK_PHONE_NUMBERS|Ti.XML.Notation.systemId|Ti.Media.AudioRecorder.stopped|Ti.UI.iOS.BLEND_MODE_DARKEN|Ti.Network.HTTPClient.allResponseHeaders|Ti.Android.EXTRA_KEY_EVENT|Ti.UI.iOS.BLEND_MODE_COLOR_BURN|Ti.XML.EntityReference.childNodes|Ti.Android.ACTION_INPUT_METHOD_CHANGED|Ti.XML.Node.text|Ti.UI.DashboardView.animatedCenter|Ti.Android.EXTRA_SHORTCUT_ICON|Ti.XML.Text.attributes|Ti.Android.SCREEN_ORIENTATION_NOSENSOR|Ti.XML.Text.TEXT_NODE|Ti.XML.Text.namespaceURI|Ti.Map.ANNOTATION_PURPLE|Ti.Android.ACTION_BUG_REPORT|Ti.XML.Node.ATTRIBUTE_NODE|Ti.UI.Android.SOFT_INPUT_STATE_UNSPECIFIED|Ti.UI.BLEND_MODE_PLUS_LIGHTER|Ti.Media.AUDIO_FORMAT_ULAW|Ti.App.EVENT_ACCESSIBILITY_ANNOUNCEMENT|Ti.Android.NotificationManager.FLAG_NO_CLEAR|Ti.UI.ANIMATION_CURVE_EASE_IN|Ti.UI.iOS.BLEND_MODE_SOURCE_IN|Ti.Android.PENDING_INTENT_FOR_SERVICE|Ti.XML.Document.parentNode|Ti.UI.iPhone.SystemButtonStyle.BORDERED|Ti.Android.ACTION_SHUTDOWN|Ti.UI.iOS.BLEND_MODE_DIFFERENCE|Ti.Network.Socket.TCP.state|Ti.XML.DocumentType.DOCUMENT_FRAGMENT_NODE|Ti.Platform.osname|Ti.UI.Android.PROGRESS_INDICATOR_INDETERMINANT|Ti.UI.EmailDialog.CANCELLED|Ti.UI.PickerColumn.rect|Ti.Android.ACTION_SYNC|Ti.Android.RESULT_OK|Ti.UI.RETURNKEY_DONE|Ti.UI.INPUT_BUTTONMODE_NEVER|Ti.Android.R|Ti.Map.SATELLITE_TYPE|Ti.Locale.currentLocale|Ti.UI.iPhone.RowAnimationStyle.BOTTOM|Ti.Codec.TYPE_DOUBLE|Ti.XML.Attr.ENTITY_REFERENCE_NODE|Ti.UI.AUTOLINK_CALENDAR|Ti.Media.Item.discNumber|Ti.Android.ACTION_MANAGE_PACKAGE_STORAGE|Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_NORMAL|Ti.XML.DocumentType.ELEMENT_NODE|Ti.XML.Entity.textContent|Ti.Media.MUSIC_MEDIA_GROUP_COMPOSER|Ti.UI.Android.WEBVIEW_PLUGINS_ON|Ti.UI.ImageView.animatedCenter|Ti.UI.ActivityIndicatorStyle.DARK|Ti.XML.Text.ownerDocument|Ti.Android.Calendar.Event.allDay|Ti.UI.Button.rect|Ti.UI.WebView.children|Ti.UI.iOS.AUTODETECT_ADDRESS|Ti.Geolocation.ERROR_REGION_MONITORING_DELAYED|Ti.XML.DocumentType.nodeType|Ti.XML.Element.ownerDocument|Ti.UI.KEYBOARD_DEFAULT|Ti.UI.Android.PIXEL_FORMAT_A_8|Ti.Gesture.landscape|Ti.Media.VIDEO_TIME_OPTION_EXACT|Ti.Android.Calendar.selectableCalendars|Ti.Map.ANNOTATION_GREEN|Ti.UI.WebView.rect|Ti.Android.Calendar.METHOD_EMAIL|Ti.Map.TERRAIN_TYPE|Ti.Blob.mimeType|Ti.UI.TableViewRow.size|Ti.Android.NotificationManager.FLAG_INSISTENT|Ti.Network.HTTPClient.responseData|Ti.XML.CharacterData.lastChild|Ti.UI.URL_ERROR_FILE|Ti.Android.Calendar.METHOD_SMS|Ti.UI.iPad.SplitWindow.orientation|Ti.Media.AudioPlayer.STATE_STOPPED|Ti.UI.iPhone.SystemButton.CAMERA|Ti.UI.PickerColumn.rowCount|Ti.Android.DEFAULT_SOUND|Ti.UI.iOS.COLOR_GROUP_TABLEVIEW_BACKGROUND|Ti.UI.Button.animatedCenter|Ti.UI.iOS.Toolbar.rect|Ti.UI.iOS.BLEND_MODE_NORMAL|Ti.Media.VIDEO_PLAYBACK_STATE_PLAYING|Ti.UI.BLEND_MODE_COPY|Ti.XML.Document.ELEMENT_NODE|Ti.Network.HTTPClient.OPENED|Ti.UI.View.size|Ti.UI.BLEND_MODE_XOR|Ti.XML.Document.implementation|Ti.Platform.runtime|Ti.XML.Node.nodeType|Ti.UI.iOS.AUTODETECT_LINK|Ti.XML.CharacterData.ENTITY_NODE|Ti.UI.iOS.BLEND_MODE_HUE|Ti.Geolocation.ERROR_NETWORK|Ti.XML.Comment.DOCUMENT_TYPE_NODE|Ti.XML.Attr.ENTITY_NODE|Ti.XML.Comment.textContent|Ti.UI.iPhone.TableViewStyle.GROUPED|Ti.UI.TableView.children|Ti.Media.VideoPlayer.playing|Ti.Android.ACTION_CONFIGURATION_CHANGED|Ti.Media.AudioPlayer.state|Ti.Media.MUSIC_MEDIA_GROUP_PODCAST_TITLE|Ti.UI.Android.PIXEL_FORMAT_L_8|Ti.XML.Element.tagName|Ti.Network.SOCKET_CLOSED|Ti.Media.VIDEO_LOAD_STATE_PLAYTHROUGH_OK|Ti.UI.iPad.Popover.arrowDirection|Ti.XML.Comment.parentNode|Ti.Android.FLAG_FROM_BACKGROUND|Ti.UI.PICKER_TYPE_DATE_AND_TIME|Ti.Geolocation.ERROR_REGION_MONITORING_DENIED|Ti.UI.iPhone.SystemButton.REWIND|Ti.UI.iOS.AD_SIZE_LANDSCAPE|Ti.Media.VideoPlayer.size|Ti.XML.EntityReference.namespaceURI|Ti.Media.VIDEO_SOURCE_TYPE_FILE|Ti.XML.DocumentFragment.ENTITY_NODE|Ti.Android.ACTION_UMS_CONNECTED|Ti.XML.EntityReference.DOCUMENT_NODE|Ti.Media.AudioPlayer.STATE_BUFFERING|Ti.Contacts.CONTACTS_KIND_ORGANIZATION|Ti.Media.VIDEO_CONTROL_VOLUME_ONLY|Ti.XML.Document.doctype|Ti.UI.iOS.BLEND_MODE_OVERLAY|Ti.UI.iPhone.MODAL_PRESENTATION_FULLSCREEN|Ti.Android.NotificationManager.DEFAULT_ALL|Ti.Codec.CHARSET_UTF16LE|Ti.Android.CATEGORY_LAUNCHER|Ti.Media.MUSIC_MEDIA_GROUP_PLAYLIST|Ti.Android.EXTRA_SHORTCUT_ICON_RESOURCE|Ti.Codec.TYPE_BYTE|Ti.UI.Android.PIXEL_FORMAT_LA_88|Ti.Android.EXTRA_STREAM|Ti.XML.CDATASection.DOCUMENT_FRAGMENT_NODE|Ti.XML.Element.childNodes|Ti.XML.CDATASection.parentNode|Ti.XML.Node.parentNode|Ti.UI.CoverFlowView.size|Ti.UI.iPhone.SystemIcon.MORE|Ti.Network.HTTPClient.LOADING|Ti.Android.FLAG_ACTIVITY_REORDER_TO_FRONT|Ti.UI.iOS.CoverFlowView.rect|Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_SMALL|Ti.XML.DocumentFragment.DOCUMENT_TYPE_NODE|Ti.Media.AUDIO_SESSION_MODE_SOLO_AMBIENT|Ti.UI.iOS.BLEND_MODE_SOFT_LIGHT|Ti.Android.ACTION_MEDIA_SCANNER_SCAN_FILE|Ti.Android.Calendar.VISIBILITY_DEFAULT|Ti.Filesystem.applicationDataDirectory|Ti.UI.Android.PIXEL_FORMAT_RGB_332|Ti.XML.Comment.PROCESSING_INSTRUCTION_NODE|Ti.XML.Attr.TEXT_NODE|Ti.XML.Attr.nextSibling|Ti.Map.HYBRID_TYPE|Ti.XML.DocumentType.PROCESSING_INSTRUCTION_NODE|Ti.Codec.CHARSET_ISO_LATIN_1|Ti.UI.iPhone.SystemButton.DISCLOSURE|Ti.UI.iPhone.RowAnimationStyle.RIGHT|Ti.Android.Calendar.Alert.state|Ti.UI.INPUT_BORDERSTYLE_ROUNDED|Ti.XML.Node.ELEMENT_NODE|Ti.UI.iPhone.SystemButton.ACTION|Ti.UI.iPad.SplitWindow.rect|Ti.UI.Tab.children|Ti.UI.iPhone.NavigationGroup.rect|Ti.XML.CharacterData.namespaceURI|Ti.Database.FIELD_TYPE_INT|Ti.Network.SOCKET_CONNECTED|Ti.XML.Element.textContent|Ti.UI.Notification.animatedCenter|Ti.UI.PickerRow.rect|Ti.Filesystem.File.symbolicLink|Ti.UI.URL_ERROR_FILE_NOT_FOUND|Ti.XML.Text.parentNode|Ti.XML.CharacterData.nodeName|Ti.Android.ACTION_PICK|Ti.UI.iPhone.SystemIcon.MOST_RECENT|Ti.Network.HTTPClient.connectionType|Ti.Media.NO_CAMERA|Ti.UI.KEYBOARD_ASCII|Ti.UI.iPhone.SystemButton.CANCEL|Ti.UI.PICKER_TYPE_DATE|Ti.UI.TabGroup.animatedCenter|Ti.UI.Window.rect|Ti.UI.iOS.CoverFlowView.animatedCenter|Ti.UI.MobileWeb.NavigationGroup.children|Ti.UI.iPhone.SystemButton.REPLY|Ti.UI.iPhone.SystemButton.ACTIVITY|Ti.Media.MusicPlayer.playbackState|Ti.UI.iOS.WEBVIEW_NAVIGATIONTYPE_LINK_CLICKED|Ti.UI.Android.PROGRESS_INDICATOR_DIALOG|Ti.Android.FLAG_ACTIVITY_NO_USER_ACTION|Ti.Android.Service.intent|Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE|Ti.Facebook.LoginButton.rect|Ti.Media.AUDIO_RECEIVER_AND_MIC|Ti.Platform.model|Ti.XML.Text.length|Ti.UI.iPhone.AnimationStyle.CURL_UP|Ti.Network.Socket.CLOSED|Ti.XML.EntityReference.previousSibling|Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS|Ti.Database.FIELD_TYPE_FLOAT|Ti.Android.Calendar.STATE_FIRED|Ti.Geolocation.ACCURACY_NEAREST_TEN_METERS|Ti.UI.Slider.animatedCenter|Ti.Platform.netmask|Ti.Android.ACTION_CALL_BUTTON|Ti.Map.ANNOTATION_DRAG_STATE_NONE|Ti.UI.TEXT_VERTICAL_ALIGNMENT_CENTER|Ti.UI.iPhone.ScrollIndicatorStyle.WHITE|Ti.Filesystem.resourcesDirectory|Ti.Android.CATEGORY_FRAMEWORK_INSTRUMENTATION_TEST|Ti.Map.ANNOTATION_DRAG_STATE_START|Ti.Android.SCREEN_ORIENTATION_UNSPECIFIED|Ti.Network.NOTIFICATION_TYPE_BADGE|Ti.Media.Item.rating|Ti.UI.TableView.size|Ti.UI.URL_ERROR_CONNECT|Ti.XML.Text.DOCUMENT_FRAGMENT_NODE|Ti.Android.FLAG_ACTIVITY_NEW_TASK|Ti.XML.CDATASection.NOTATION_NODE|Ti.XML.DocumentFragment.nextSibling|Ti.Media.audioPlaying|Ti.XML.DocumentFragment.COMMENT_NODE|Ti.Android.ACTION_UMS_DISCONNECTED|Ti.XML.EntityReference.NOTATION_NODE|Ti.UI.iPhone.SystemButton.PLAY|Ti.UI.Notification.children|Ti.UI.Android.LINKIFY_WEB_URLS|Ti.Media.QUALITY_MEDIUM|Ti.UI.iOS.Toolbar.size|Ti.Android.Calendar.VISIBILITY_PRIVATE|Ti.Media.AudioPlayer.STATE_PLAYING|Ti.Codec.CHARSET_ASCII|Ti.Media.Item.skipCount|Ti.XML.CharacterData.TEXT_NODE|Ti.Android.ACTION_SYSTEM_TUTORIAL|Ti.XML.Element.parentNode|Ti.Android.R.integer|Ti.UI.BLEND_MODE_COLOR_DODGE|Ti.Media.VIDEO_FINISH_REASON_PLAYBACK_ERROR|Ti.UI.TabGroup.children|Ti.Android.STREAM_VOICE_CALL|Ti.buildHash|Ti.Map.View.children|Ti.XML.Node.ownerDocument|Ti.Media.AUDIO_SESSION_MODE_PLAYBACK|Ti.Map.View.size|Ti.Android.Calendar.Event.extendedProperties|Ti.XML.DocumentType.NOTATION_NODE|Ti.UI.iOS.DocumentViewer.children|Ti.Media.VIDEO_SOURCE_TYPE_STREAMING|Ti.Media.isCameraSupported|Ti.Network.SOCKET_ERROR|Ti.Android.EXTRA_SUBJECT|Ti.Android.FLAG_ONGOING_EVENT|Ti.Android.Calendar.STATE_DISMISSED|Ti.UI.SearchBar.children|Ti.UI.iOS.TabbedBar.children|Ti.UI.iOS.DocumentViewer.size|Ti.Android.FLAG_ONLY_ALERT_ONCE|Ti.Android.Calendar.STATUS_TENTATIVE|Ti.XML.EntityReference.ELEMENT_NODE|Ti.UI.TextArea.children|Ti.Map.View.longitudeDelta|Ti.XML.CDATASection.childNodes|Ti.Map.View.animatedCenter|Ti.XML.EntityReference.ownerDocument|Ti.Media.AUDIO_UNAVAILABLE|Ti.Android.Calendar.Event.description|Ti.Media.Item.genre|Ti.Android.Calendar.Event.begin|Ti.UI.UNIT_IN|Ti.XML.Node.childNodes|Ti.Media.VIDEO_SCALING_ASPECT_FIT|Ti.Android.FLAG_ACTIVITY_MULTIPLE_TASK|Ti.UI.iPhone.AnimationStyle.CURL_DOWN|Ti.Filesystem.lineEnding|Ti.Platform.architecture|Ti.UI.iPhone.ProgressBarStyle.DEFAULT|Ti.XML.Node.firstChild|Ti.UI.Switch.rect|Ti.Platform.Android.PHYSICAL_SIZE_CATEGORY_XLARGE|Ti.XML.Entity.ATTRIBUTE_NODE|Ti.Android.NotificationManager.FLAG_ONLY_ALERT_ONCE|Ti.App.iOS.EVENT_ACCESSIBILITY_SCREEN_CHANGED|Ti.UI.Switch.children|Ti.Android.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET|Ti.XML.CDATASection.CDATA_SECTION_NODE|Ti.Filesystem.tempDirectory|Ti.XML.CharacterData.ATTRIBUTE_NODE|Ti.XML.Document.ATTRIBUTE_NODE|Ti.UI.DashboardView.children|Ti.UI.View.animatedCenter|Ti.Android.Calendar.Calendar.selected|Ti.UI.Notification.rect|Ti.Codec.TYPE_INT|Ti.XML.CDATASection.textContent|Ti.Blob.width|Ti.XML.Node.COMMENT_NODE|Ti.Media.Item.podcastTitle|Ti.UI.iPhone.StatusBar.GREY|Ti.Stream.MODE_READ|Ti.Contacts.Person.fullName|Ti.Android.ACTION_VIEW|Ti.XML.CDATASection.length|Ti.Android.ACTION_CREATE_SHORTCUT|Ti.XML.CharacterData.parentNode|Ti.UI.TEXT_ALIGNMENT_RIGHT|Ti.XML.Text.ENTITY_NODE|Ti.UI.Toolbar.size|Ti.UI.iPhone.RowAnimationStyle.TOP|Ti.UI.BLEND_MODE_LUMINOSITY|Ti.Geolocation.AUTHORIZATION_RESTRICTED|Ti.XML.Element.CDATA_SECTION_NODE|Ti.XML.Attr.previousSibling|Ti.Media.AUDIO_FORMAT_AAC|Ti.UI.BLEND_MODE_SOURCE_ATOP|Ti.UI.Label.rect|Ti.UI.Android.WEBVIEW_PLUGINS_ON_DEMAND|Ti.Android.R.array|Ti.Android.Calendar.Reminder.minutes|Ti.XML.Element.firstChild|Ti.XML.DocumentType.entities|Ti.Android.ACTION_MEDIA_SHARED|Ti.XML.CDATASection.COMMENT_NODE|Ti.Android.EXTRA_UID|Ti.UI.PickerColumn.size|Ti.Media.AudioPlayer.progress|Ti.Android.FLAG_DEBUG_LOG_RESOLUTION|Ti.UI.Window.size|Ti.Android.ACTION_SCREEN_ON|Ti.XML.Text.COMMENT_NODE|Ti.XML.Attr.childNodes|Ti.UI.RETURNKEY_ROUTE|Ti.App.url|Ti.Android.ACTION_GTALK_SERVICE_CONNECTED|Ti.UI.AUTOLINK_EMAIL_ADDRESSES|Ti.XML.CharacterData.nextSibling|Ti.UI.Android.SearchView.rect|Ti.XML.Comment.text|Ti.App.sessionId|Ti.Android.FLAG_ACTIVITY_NO_HISTORY|Ti.UI.AUTODETECT_NONE|Ti.XML.Text.DOCUMENT_TYPE_NODE|Ti.Android.FLAG_ACTIVITY_FORWARD_RESULT|Ti.UI.iPhone.SystemIcon.TOP_RATED|Ti.UI.Label.animatedCenter|Ti.Android.STREAM_NOTIFICATION|Ti.Facebook.BUTTON_STYLE_WIDE|Ti.XML.Text.nodeType|Ti.UI.Android.PIXEL_FORMAT_RGBA_8888|Ti.UI.ScrollableView.size|Ti.UI.RETURNKEY_YAHOO|Ti.XML.CDATASection.attributes|Ti.UI.iPhone.SystemIcon.DOWNLOADS|Ti.UI.iOS.AdView.size|Ti.XML.DocumentType.ATTRIBUTE_NODE|Ti.UI.iOS.AdView.animatedCenter|Ti.UI.FACE_UP|Ti.UI.MobileWeb.NavigationGroup.rect|Ti.XML.Text.nextSibling|Ti.Media.AudioPlayer.waiting|Ti.UI.iPhone.NavigationGroup.children|Ti.XML.Entity.DOCUMENT_TYPE_NODE|Ti.Android.ActionBar.backgroundImage|Ti.UI.iOS.BLEND_MODE_DESTINATION_ATOP|Ti.UI.BLEND_MODE_DIFFERENCE|Ti.XML.DocumentFragment.attributes|Ti.Network.remoteNotificationTypes|Ti.XML.Comment.NOTATION_NODE|Ti.Network.NOTIFICATION_TYPE_ALERT|Ti.Android.Calendar.STATE_SCHEDULED|Ti.Facebook.LoginButton.children|Ti.Filesystem.File.readonly|Ti.XML.Entity.publicId|Ti.XML.Entity.DOCUMENT_FRAGMENT_NODE|Ti.UI.iPhone.ActivityIndicatorStyle.BIG|Ti.Android.FLAG_GRANT_READ_URI_PERMISSION|Ti.UI.Slider.children|Ti.Android.FILL_IN_PACKAGE|Ti.App.accessibilityEnabled|Ti.UI.iPhone.TableViewCellSelectionStyle.NONE|Ti.UI.URL_ERROR_AUTHENTICATION|Ti.UI.iOS.WEBVIEW_NAVIGATIONTYPE_BACK_FORWARD|Ti.Android.ACTION_SET_WALLPAPER|Ti.UI.AUTOLINK_NONE|Ti.Media.MUSIC_PLAYER_STATE_PAUSED|Ti.Network.NETWORK_MOBILE|Ti.UI.INPUT_BUTTONMODE_ONBLUR|Ti.UI.INPUT_BORDERSTYLE_LINE|Ti.Media.VIDEO_FINISH_REASON_PLAYBACK_ENDED|Ti.XML.CharacterData.DOCUMENT_TYPE_NODE|Ti.XML.CDATASection.nodeName|Ti.Media.MUSIC_PLAYER_REPEAT_ONE|Ti.Android.Calendar.Event.id|Ti.XML.CharacterData.ENTITY_REFERENCE_NODE|Ti.Media.VIDEO_CONTROL_NONE|Ti.XML.Node.namespaceURI|Ti.XML.Entity.NOTATION_NODE|Ti.XML.Attr.nodeType|Ti.Android.R.anim|Ti.XML.DocumentType.parentNode|Ti.UI.iPhone.TableViewStyle.PLAIN|Ti.UI.Android.LINKIFY_PHONE_NUMBERS|Ti.UI.iPhone.SystemButton.ORGANIZE|Ti.XML.DocumentFragment.text|Ti.XML.Attr.attributes|Ti.UI.iOS.BLEND_MODE_XOR|Ti.UI.TableViewRow.animatedCenter|Ti.UI.RETURNKEY_DEFAULT|Ti.Android.currentService|Ti.UI.AUTOLINK_ALL|Ti.UI.ImageView.size|Ti.UI.iPad.POPOVER_ARROW_DIRECTION_LEFT|Ti.XML.EntityReference.text|Ti.Android.ACTION_MEDIA_CHECKING|Ti.UI.KEYBOARD_APPEARANCE_ALERT|Ti.Geolocation.ACCURACY_BEST|Ti.Network.NETWORK_UNKNOWN|Ti.UI.ButtonBar.rect|Ti.App.installId|Ti.XML.Document.nodeName|Ti.Android.NotificationManager.DEFAULT_VIBRATE|Ti.Android.Calendar.Alert.id|Ti.UI.iOS.BLEND_MODE_COLOR_DODGE|Ti.Media.VIDEO_SCALING_MODE_FILL|Ti.XML.Document.nodeType|Ti.UI.Window.children|Ti.XML.Comment.COMMENT_NODE|Ti.UI.Switch.size|Ti.XML.Entity.nextSibling|Ti.Android.FILL_IN_DATA|Ti.XML.DocumentType.COMMENT_NODE|Ti.Android.ACTION_CHOOSER|Ti.Network.networkType|Ti.UI.iPhone.TableViewScrollPosition.NONE|Ti.Media.MEDIA_TYPE_VIDEO|Ti.XML.Element.ATTRIBUTE_NODE|Ti.UI.PickerColumn.rows|Ti.Android.ACTION_SEARCH_LONG_PRESS|Ti.Android.R.dimen|Ti.Media.MUSIC_MEDIA_TYPE_AUDIOBOOK|Ti.Media.VIDEO_PLAYBACK_STATE_SEEKING_FORWARD|Ti.XML.DocumentType.firstChild|Ti.Media.AudioRecorder.paused|Ti.Event.bubbles|Ti.Stream.MODE_WRITE|Ti.Media.AUDIO_FILEFORMAT_MP3|Ti.XML.EntityReference.lastChild|Ti.Android.ACTION_INSERT|Ti.UI.iPad.POPOVER_ARROW_DIRECTION_ANY|Ti.XML.DocumentFragment.namespaceURI|Ti.Platform.BATTERY_STATE_UNKNOWN|Ti.UI.NOTIFICATION_DURATION_LONG|Ti.Media.AUDIO_FILEFORMAT_WAVE|Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_NONE|Ti.Network.HTTPClient.readyState|Ti.Media.VIDEO_REPEAT_MODE_ONE|Ti.UI.Android.PIXEL_FORMAT_RGB_565|Ti.UI.iOS.AUTODETECT_CALENDAR|Ti.XML.Entity.CDATA_SECTION_NODE|Ti.XML.Document.PROCESSING_INSTRUCTION_NODE|Ti.Media.AUDIO_FILEFORMAT_AIFF|Ti.UI.iOS.COLOR_SCROLLVIEW_BACKGROUND|Ti.Android.ACTION_MEDIA_UNMOUNTABLE|Ti.Media.VideoPlayer.playableDuration|Ti.UI.TextField.animatedCenter|Ti.UI.PickerRow.children|Ti.XML.Document.childNodes|Ti.Android.Calendar.Event.end|Ti.XML.Attr.text|Ti.XML.Comment.TEXT_NODE|Ti.Contacts.Person.created|Ti.Android.NotificationManager.FLAG_ONGOING_EVENT|Ti.Network.NOTIFICATION_TYPE_SOUND|Ti.UI.PickerRow.size|Ti.XML.Entity.namespaceURI|Ti.Android.ACTION_MEDIA_SCANNER_FINISHED|Ti.Contacts.AUTHORIZATION_UNKNOWN|Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS|Ti.Android.Calendar.Reminder.id|Ti.Media.Sound.playing|Ti.UI.iPhone.StatusBar.TRANSLUCENT_BLACK|Ti.Media.VIDEO_PLAYBACK_STATE_STOPPED|Ti.Android.ACTION_PICK_ACTIVITY|Ti.Android.Service.serviceInstanceId|Ti.Android.NotificationManager.DEFAULT_SOUND|Ti.UI.BLEND_MODE_HUE|Ti.Android.ACTION_TIME_CHANGED|Ti.UI.UPSIDE_PORTRAIT|Ti.UI.CoverFlowView.children|Ti.Media.AUDIO_HEADSET_INOUT|Ti.UI.iPhone.SystemButton.REFRESH|Ti.Android.MenuItem.showAsAction|Ti.Media.MUSIC_PLAYER_STATE_SEEK_FORWARD|Ti.UI.iOS.ANIMATION_CURVE_EASE_IN|Ti.Media.Item.artwork|Ti.XML.Text.DOCUMENT_NODE|Ti.Media.VIDEO_LOAD_STATE_STALLED|Ti.Network.READ_MODE|Ti.Android.ACTION_WEB_SEARCH|Ti.UI.iOS.BLEND_MODE_DESTINATION_IN|Ti.UI.Tab.animatedCenter|Ti.Android.CATEGORY_TAB|Ti.UI.ImageView.paused|Ti.Media.AUDIO_FORMAT_APPLE_LOSSLESS|Ti.Android.MenuItem.order|Ti.UI.iPhone.AnimationStyle.NONE|Ti.XML.DocumentFragment.ATTRIBUTE_NODE|Ti.Media.VideoPlayer.children|Ti.Network.remoteDeviceUUID|Ti.Codec.CHARSET_UTF16BE|Ti.Android.Calendar.Event.status|Ti.Media.MUSIC_MEDIA_GROUP_ARTIST|Ti.Android.ACTION_CAMERA_BUTTON|Ti.UI.ProgressBar.children|Ti.XML.EntityReference.textContent|Ti.UI.iOS.WEBVIEW_NAVIGATIONTYPE_FORM_RESUBMITTED|Ti.UI.Android.SearchView.animatedCenter|Ti.UI.iPhone.TableViewScrollPosition.BOTTOM|Ti.UI.ANIMATION_CURVE_EASE_IN_OUT|Ti.version|Ti.UI.TableView.rect|Ti.Media.UNKNOWN_ERROR|Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT|Ti.Android.ACTION_POWER_DISCONNECTED|Ti.Android.ACTION_PACKAGE_REPLACED|Ti.XML.Attr.ownerElement|Ti.Geolocation.ACCURACY_THREE_KILOMETERS|Ti.Platform.name|Ti.Network.NETWORK_NONE|Ti.XML.DocumentType.namespaceURI|Ti.XML.Node.attributes|Ti.Media.Item.title|Ti.UI.View.children|Ti.UI.currentWindow|Ti.XML.DocumentFragment.childNodes|Ti.XML.Element.previousSibling|Ti.UI.TabbedBar.size|Ti.XML.EntityReference.parentNode|Ti.App.EVENT_ACCESSIBILITY_CHANGED|Ti.Network.NETWORK_LAN|Ti.Android.ACTION_BATTERY_CHANGED|Ti.App.id|Ti.XML.Attr.name|Ti.Android.CATEGORY_EMBED|Ti.Media.MUSIC_PLAYER_STATE_SEEK_BACKWARD|Ti.Filesystem.File.size|Ti.XML.Attr.textContent|Ti.XML.Node.DOCUMENT_FRAGMENT_NODE|Ti.UI.ScrollView.animatedCenter|Ti.XML.DocumentFragment.NOTATION_NODE|Ti.XML.DocumentType.notations|Ti.Android.NotificationManager.FLAG_SHOW_LIGHTS|Ti.Android.ACTION_MEDIA_SCANNER_STARTED|Ti.UI.SearchBar.rect|Ti.App.analytics|Ti.Android.Calendar.Event.location|Ti.Android.FLAG_NO_CREATE|Ti.XML.DocumentType.textContent|Ti.App.version|Ti.XML.EntityReference.nodeType|Ti.Android.FLAG_AUTO_CANCEL|Ti.Android.ACTION_VOICE_COMMAND|Ti.Media.Item.albumTrackCount|Ti.XML.Text.ELEMENT_NODE|Ti.Geolocation.PROVIDER_GPS|Ti.XML.DocumentType.TEXT_NODE|Ti.XML.Text.CDATA_SECTION_NODE|Ti.App.guid|Ti.Map.ANNOTATION_DRAG_STATE_CANCEL|Ti.App.Android.R|Ti.Android.R.color|Ti.Media.VIDEO_SOURCE_TYPE_UNKNOWN|Ti.UI.TableView.sectionCount|Ti.Media.MusicPlayer.nowPlaying|Ti.XML.Comment.firstChild|Ti.UI.ProgressBar.rect|Ti.Android.ACTION_REBOOT|Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_FADE|Ti.Geolocation.PROVIDER_NETWORK|Ti.XML.Element.text|Ti.UI.Android.SOFT_INPUT_STATE_ALWAYS_HIDDEN|Ti.Android.ACTION_EDIT|Ti.XML.Attr.parentNode|Ti.Media.MUSIC_PLAYER_REPEAT_NONE|Ti.Media.VIDEO_PLAYBACK_STATE_SEEKING_BACKWARD|Ti.Android.ACTION_GET_CONTENT|Ti.XML.EntityReference.firstChild|Ti.UI.MobileWeb.TableViewSeparatorStyle.NONE|Ti.UI.iPhone.ActivityIndicatorStyle.DARK|Ti.UI.iOS.BLEND_MODE_CLEAR|Ti.UI.BLEND_MODE_HARD_LIGHT|Ti.Android.CATEGORY_TEST|Ti.App.publisher|Ti.App.description|Ti.UI.PORTRAIT|Ti.XML.EntityReference.COMMENT_NODE|Ti.UI.iOS.COLOR_UNDER_PAGE_BACKGROUND|Ti.XML.Document.ENTITY_NODE|Ti.XML.Document.firstChild|Ti.UI.iPhone.SystemIcon.CONTACTS|Ti.UI.iPad.SplitWindow.animatedCenter|Ti.Android.MenuItem.actionViewExpanded|Ti.Android.ACTION_DEFAULT|Ti.XML.CharacterData.DOCUMENT_FRAGMENT_NODE|Ti.Geolocation.ACCURACY_HIGH|Ti.UI.iOS.TabbedBar.animatedCenter|Ti.Network.WRITE_MODE|Ti.XML.DocumentFragment.lastChild|Ti.XML.Attr.lastChild|Ti.Android.FLAG_INSISTENT|Ti.XML.Node.lastChild|Ti.UI.Android.SWITCH_STYLE_CHECKBOX|Ti.XML.CharacterData.nodeType|Ti.XML.CDATASection.ELEMENT_NODE|Ti.Android.FLAG_RECEIVER_REGISTERED_ONLY|Ti.UI.iPad.DocumentViewer.children|Ti.UI.KEYBOARD_EMAIL|Ti.UI.iPhone.RowAnimationStyle.FADE|Ti.Media.MUSIC_PLAYER_STATE_PLAYING|Ti.XML.Entity.PROCESSING_INSTRUCTION_NODE|Ti.Codec.TYPE_FLOAT|Ti.XML.CDATASection.nextSibling|Ti.Blob.text|Ti.XML.Node.nextSibling|Ti.UI.TableViewRow.rect|Ti.Android.Calendar.allAlerts|Ti.Filesystem.applicationDirectory|Ti.XML.Node.CDATA_SECTION_NODE|Ti.XML.Text.ENTITY_REFERENCE_NODE|Ti.UI.KEYBOARD_PHONE_PAD|Ti.UI.ActivityIndicatorStyle.BIG_DARK|Ti.XML.CDATASection.text|Ti.Media.VIDEO_FINISH_REASON_USER_EXITED|Ti.UI.TabbedBar.rect|Ti.Android.MenuItem.icon|Ti.XML.CharacterData.length|Ti.UI.iPhone.SystemButton.DONE|Ti.Network.INADDR_ANY|Ti.Media.MUSIC_MEDIA_GROUP_ALBUM_ARTIST|Ti.Android.Calendar.STATUS_CANCELED|Ti.XML.Entity.parentNode|Ti.XML.DocumentType.nextSibling|Ti.UI.Notification.size|Ti.Media.VIDEO_CONTROL_DEFAULT|Ti.UI.BLEND_MODE_SOURCE_IN|Ti.UI.URL_ERROR_REDIRECT_LOOP|Ti.Android.EXTRA_REPLACING|Ti.XML.Notation.publicId|Ti.Android.CATEGORY_BROWSABLE|Ti.Map.ANNOTATION_DRAG_STATE_DRAG|Ti.Android.ACTION_AIRPLANE_MODE_CHANGED|Ti.Codec.TYPE_LONG|Ti.UI.iOS.AD_SIZE_PORTRAIT|Ti.UI.ScrollView.size|Ti.Media.Sound.duration|Ti.UI.iOS.ANIMATION_CURVE_LINEAR|Ti.XML.Attr.ATTRIBUTE_NODE|Ti.UI.iPhone.SystemButton.INFO_LIGHT|Ti.XML.Document.nextSibling|Ti.Blob.height|Ti.Contacts.CONTACTS_SORT_LAST_NAME|Ti.UI.iPhone.SystemButton.STOP|Ti.XML.CDATASection.ENTITY_REFERENCE_NODE|Ti.Android.Calendar.Event.visibility|Ti.Android.STREAM_DEFAULT|Ti.Android.ACTION_MEDIA_REMOVED|Ti.XML.Attr.PROCESSING_INSTRUCTION_NODE|Ti.Media.Item.artist|Ti.Android.EXTRA_TEMPLATE|Ti.Android.Calendar.Event.alerts|Ti.Network.Socket.CONNECTED|Ti.XML.Element.attributes|Ti.Android.R.attr|Ti.XML.Element.nodeName|Ti.UI.TableViewSection.rows|Ti.UI.KEYBOARD_APPEARANCE_DEFAULT|Ti.Platform.id|Ti.Geolocation.ACCURACY_HUNDRED_METERS|Ti.XML.DocumentFragment.textContent|Ti.Android.ACTION_ATTACH_DATA|Ti.XML.Document.ownerDocument|Ti.Android.MenuItem.groupId|Ti.Platform.ostype|Ti.Network.HTTPClient.HEADERS_RECEIVED|Ti.Android.ACTION_PROVIDER_CHANGED|Ti.UI.Android.SOFT_INPUT_ADJUST_PAN|Ti.UI.iPhone.MODAL_PRESENTATION_FORMSHEET|Ti.UI.iPad.POPOVER_ARROW_DIRECTION_RIGHT|Ti.Stream.MODE_APPEND|Ti.App.deployType|Ti.UI.MobileWeb.NavigationGroup.size|Ti.XML.CDATASection.ownerDocument|Ti.UI.TextArea.rect|Ti.UI.iPad.DocumentViewer.animatedCenter|Ti.XML.EntityReference.nodeName|Ti.Android.PENDING_INTENT_FOR_BROADCAST|Ti.UI.ScrollableView.rect|Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP|Ti.UI.iOS.BLEND_MODE_PLUS_DARKER|Ti.UI.iPhone.ScrollIndicatorStyle.BLACK|Ti.UI.EmailDialog.SENT|Ti.XML.Document.ENTITY_REFERENCE_NODE|Ti.UI.iPhone.StatusBar.OPAQUE_BLACK|Ti.UI.TextField.size|Ti.UI.iOS.BLEND_MODE_LIGHTEN|Ti.UI.LANDSCAPE_LEFT|Ti.UI.iPhone.StatusBar.DEFAULT|Ti.Contacts.AUTHORIZATION_RESTRICTED|Ti.Android.DEFAULT_VIBRATE|Ti.Media.MUSIC_MEDIA_GROUP_GENRE|Ti.UI.iPhone.StatusBar.ANIMATION_STYLE_SLIDE|Ti.Android.ACTION_DEVICE_STORAGE_LOW|Ti.UI.Tab.rect|Ti.UI.RETURNKEY_JOIN|Ti.XML.DocumentFragment.previousSibling|Ti.XML.Entity.attributes|Ti.UI.iPhone.SystemIcon.FAVORITES|Ti.XML.Entity.nodeName|Ti.XML.Comment.childNodes|Ti.UI.iOS.DocumentViewer.animatedCenter|Ti.Network.SOCKET_LISTENING|Ti.XML.Entity.systemId|Ti.Media.AUDIO_SESSION_MODE_PLAY_AND_RECORD|Ti.Android.Activity.intent|Ti.XML.Entity.DOCUMENT_NODE|Ti.XML.Element.TEXT_NODE|Ti.Android.R.styleable|Ti.Media.AudioRecorder.recording|Ti.Android.URI_INTENT_SCHEME|Ti.UI.iPhone.NavigationGroup.size|Ti.XML.Entity.ownerDocument|Ti.UI.LANDSCAPE_RIGHT|Ti.Android.FLAG_NO_CLEAR|Ti.Android.ACTION_CALL|Ti.UI.TabGroup.size|Ti.XML.DocumentType.text|Ti.UI.ScrollView.children|Ti.Network.remoteNotificationsEnabled|Ti.Platform.username|Ti.Codec.CHARSET_UTF8|Ti.UI.AUTODETECT_LINK|Ti.UI.iPhone.MODAL_PRESENTATION_CURRENT_CONTEXT|Ti.XML.CharacterData.textContent|Ti.Media.AUDIO_SPEAKER|Ti.UI.iPhone.AlertDialogStyle.DEFAULT|Ti.UI.iPad.SplitWindow.children|Ti.Media.NO_VIDEO|Ti.Geolocation.ACCURACY_LOW|Ti.Media.MUSIC_MEDIA_TYPE_MUSIC|Ti.UI.iPhone.SystemButton.FAST_FORWARD|Ti.Android.EXTRA_INTENT|Ti.UI.Android.SOFT_INPUT_ADJUST_RESIZE|Ti.UI.BLEND_MODE_LIGHTEN|Ti.Media.AudioPlayer.STATE_STARTING|Ti.Network.HTTPClient.status|Ti.Media.volume|Ti.Media.Item.composer|Ti.UI.PickerRow.animatedCenter|Ti.UI.AUTOLINK_MAP_ADDRESSES|Ti.Media.MEDIA_TYPE_PHOTO|Ti.XML.Attr.DOCUMENT_TYPE_NODE|Ti.UI.iOS.BLEND_MODE_EXCLUSION|Ti.UI.TEXT_AUTOCAPITALIZATION_ALL|Ti.XML.CDATASection.lastChild|Ti.UI.AUTODETECT_ALL|Ti.XML.Document.textContent|Ti.UI.iOS.BLEND_MODE_COLOR|Ti.XML.Text.textContent|Ti.UI.iOS.BLEND_MODE_DESTINATION_OUT|Ti.Android.ACTION_HEADSET_PLUG|Ti.XML.Comment.namespaceURI|Ti.Android.ACTION_MEDIA_EJECT|Ti.Media.AudioPlayer.STATE_STOPPING|Ti.Android.currentActivity|Ti.XML.Node.PROCESSING_INSTRUCTION_NODE|Ti.XML.Comment.ELEMENT_NODE|Ti.Android.CATEGORY_INFO|Ti.XML.Attr.namespaceURI|Ti.UI.BLEND_MODE_PLUS_DARKER|Ti.XML.Comment.DOCUMENT_FRAGMENT_NODE|Ti.XML.Document.NOTATION_NODE|Ti.UI.Button.size|Ti.UI.INPUT_BORDERSTYLE_NONE|Ti.XML.Element.lastChild|Ti.UI.UNIT_PX|Ti.XML.Document.DOCUMENT_FRAGMENT_NODE|Ti.XML.DocumentFragment.firstChild|Ti.Android.Activity.requestedOrientation|Ti.XML.CharacterData.previousSibling|Ti.Media.VIDEO_MEDIA_TYPE_VIDEO|Ti.Media.AUDIO_MICROPHONE|Ti.UI.View.rect|Ti.Contacts.AUTHORIZATION_AUTHORIZED|Ti.Media.AUDIO_MUTED|Ti.UI.KEYBOARD_DECIMAL_PAD|Ti.Platform.processorCount|Ti.Media.AudioPlayer.STATE_PAUSED|Ti.UI.BLEND_MODE_CLEAR|Ti.Database.FIELD_TYPE_DOUBLE|Ti.XML.Attr.NOTATION_NODE|Ti.UI.Android.SOFT_INPUT_STATE_HIDDEN|Ti.Android.ACTION_DIAL|Ti.UI.BLEND_MODE_DARKEN|Ti.UI.TableViewRow.children|Ti.Media.MUSIC_MEDIA_TYPE_ANY_AUDIO|Ti.UI.iPhone.NavigationGroup.animatedCenter|Ti.Android.SCREEN_ORIENTATION_PORTRAIT|Ti.Android.EXTRA_SHORTCUT_INTENT|Ti.Geolocation.ERROR_HEADING_FAILURE|Ti.Media.MUSIC_PLAYER_SHUFFLE_DEFAULT|Ti.UI.ActivityIndicatorStyle.BIG|Ti.Android.ActionBar.displayHomeAsUp|Ti.App.proximityState|Ti.XML.EntityReference.DOCUMENT_FRAGMENT_NODE|Ti.UI.Android.PIXEL_FORMAT_TRANSLUCENT|Ti.UI.ScrollableView.animatedCenter|Ti.UI.AUTODETECT_ADDRESS|Ti.App.keyboardVisible|Ti.Android.ACTION_BOOT_COMPLETED|Ti.UI.iPad.Popover.children|Ti.XML.Entity.text|Ti.XML.Element.DOCUMENT_FRAGMENT_NODE|Ti.Gesture.portrait|Ti.Media.AUDIO_FORMAT_ILBC|Ti.XML.DocumentFragment.CDATA_SECTION_NODE|Ti.XML.Comment.nodeType|Ti.Network.NETWORK_WIFI|Ti.Android.Calendar.STATUS_CONFIRMED|Ti.Platform.version|Ti.UI.iPhone.SystemIcon.SEARCH|Ti.XML.DocumentFragment.ELEMENT_NODE|Ti.UI.UNKNOWN|Ti.UI.ButtonBar.children|Ti.Locale.currentLanguage|Ti.UI.BLEND_MODE_COLOR_BURN|Ti.Media.MUSIC_PLAYER_SHUFFLE_SONGS|Ti.UI.TextArea.size|Ti.Codec.CHARSET_UTF16|Ti.Android.Intent.data|Ti.UI.iOS.TabbedBar.rect|Ti.Android.NotificationManager.DEFAULT_LIGHTS|Ti.UI.iPhone.SystemButton.INFO_DARK|Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS|Ti.Map.View.rect|Ti.UI.iOS.WEBVIEW_NAVIGATIONTYPE_OTHER|Ti.XML.EntityReference.nextSibling|Ti.UI.PICKER_TYPE_TIME|Ti.UI.iPhone.TableViewSeparatorStyle.SINGLE_LINE|Ti.XML.DocumentType.ownerDocument|Ti.Android.NotificationManager.FLAG_AUTO_CANCEL|Ti.Platform.BATTERY_STATE_UNPLUGGED|Ti.XML.EntityReference.TEXT_NODE|Ti.Geolocation.ERROR_LOCATION_UNKNOWN|Ti.UI.TEXT_VERTICAL_ALIGNMENT_BOTTOM|Ti.UI.URL_ERROR_SSL_FAILED|Ti.Map.STANDARD_TYPE|Ti.XML.Text.firstChild|Ti.Media.MUSIC_PLAYER_STATE_INTERRUPTED|Ti.Android.FLAG_GRANT_WRITE_URI_PERMISSION|Ti.UI.iPad.SplitWindow.size|Ti.XML.CDATASection.ATTRIBUTE_NODE|Ti.UI.AUTOLINK_URLS|Ti.Android.SHOW_AS_ACTION_NEVER|Ti.UI.iOS.WEBVIEW_NAVIGATIONTYPE_RELOAD|Ti.XML.CharacterData.COMMENT_NODE|Ti.Network.networkTypeName|Ti.UI.iPad.DocumentViewer.size|Ti.XML.Document.DOCUMENT_TYPE_NODE|Ti.Contacts.Person.id|Ti.UI.INPUT_BUTTONMODE_ONFOCUS|Ti.Android.Calendar.Alert.begin|Ti.XML.Element.PROCESSING_INSTRUCTION_NODE|Ti.XML.Entity.ENTITY_NODE|Ti.UI.iOS.Toolbar.animatedCenter|Ti.Android.ACTION_PACKAGE_RESTARTED|Ti.Geolocation.AUTHORIZATION_AUTHORIZED|Ti.UI.iOS.BLEND_MODE_SOURCE_ATOP|Ti.UI.iPhone.TableViewScrollPosition.MIDDLE|Ti.UI.iOS.BLEND_MODE_SOURCE_OUT|Ti.Database.ResultSet.rowCount|Ti.Android.ACTION_DELETE|Ti.Filesystem.File.parent|Ti.UI.ProgressBar.size|Ti.XML.Text.PROCESSING_INSTRUCTION_NODE|Ti.Android.CATEGORY_HOME|Ti.XML.Attr.nodeName|Ti.Android.FLAG_CANCEL_CURRENT|Ti.Media.Item.playbackDuration|Ti.Codec.BIG_ENDIAN|Ti.Android.ACTION_MEDIA_NOFS|Ti.Geolocation.PROVIDER_PASSIVE|Ti.Android.Activity.actionBar|Ti.Android.CATEGORY_DEVELOPMENT_PREFERENCE|Ti.UI.RETURNKEY_EMERGENCY_CALL|Ti.UI.BLEND_MODE_DESTINATION_OUT|Ti.Android.CATEGORY_ALTERNATIVE|Ti.UI.iOS.CoverFlowView.size|Ti.XML.Comment.ENTITY_NODE|Ti.Media.VideoPlayer.media|Ti.UI.Android.SearchView.children|Ti.Android.STREAM_SYSTEM|Ti.Android.DEFAULT_LIGHTS)\\b", 
+                    "name": "invalid.deprecated.color.w3c-non-standard-color-name.tss"
+                }, 
+                {
+                    "begin": "(hsla?|rgba?)\\s*(\\()", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "support.function.misc.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "end": "(\\))", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "patterns": [
+                        {
+                            "match": "(?x)\\b\n\t\t\t\t\t\t\t    (0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\\s*,\\s*){2}\n\t\t\t\t\t\t\t    (0*((1?[0-9]{1,2})|(2([0-4][0-9]|5[0-5])))\\b)\n\t\t\t\t\t\t\t    (\\s*,\\s*((0?\\.[0-9]+)|[0-1]))?\n\t\t\t\t\t\t\t", 
+                            "name": "constant.other.color.rgb-value.tss"
+                        }, 
+                        {
+                            "match": "\\b([0-9]{1,2}|100)\\s*%,\\s*([0-9]{1,2}|100)\\s*%,\\s*([0-9]{1,2}|100)\\s*%", 
+                            "name": "constant.other.color.rgb-percentage.tss"
+                        }, 
+                        {
+                            "include": "#numeric-values"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        "comment-block": {
+            "begin": "/\\*", 
+            "captures": {
+                "0": {
+                    "name": "punctuation.definition.comment.tss"
+                }
+            }, 
+            "end": "\\*/", 
+            "name": "comment.block.tss"
+        }, 
+        "comment-line": {
+            "begin": "//", 
+            "captures": {
+                "0": {
+                    "name": "punctuation.definition.comment.tss"
+                }
+            }, 
+            "end": "\\n", 
+            "name": "comment.line.doble-slash.tss"
+        }, 
+        "media-query": {
+            "begin": "(?i)\\s*(only|not)?\\s*(all|aural|braille|embossed|handheld|print|projection|screen|tty|tv)?", 
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.operator.logic.media.tss"
+                }, 
+                "2": {
+                    "name": "support.constant.media.tss"
+                }
+            }, 
+            "end": "\\s*(?:(,)|(?=[{;]))", 
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.arbitrary-repitition.tss"
+                }
+            }, 
+            "patterns": [
+                {
+                    "begin": "\\s*(and)?\\s*(\\()\\s*", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.operator.logic.media.tss"
+                        }
+                    }, 
+                    "end": "\\)", 
+                    "patterns": [
+                        {
+                            "begin": "(?x)\n\t                            (\n\t                                ((min|max)-)?\n\t                                (\n\t                                    ((device-)?(height|width|aspect-ratio))|\n\t                                    (color(-index)?)|monochrome|resolution\n\t                                )\n\t                            )|grid|scan|orientation\n\t                            \\s*(?=[:)])", 
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "support.type.property-name.media.tss"
+                                }
+                            }, 
+                            "end": "(:)|(?=\\))", 
+                            "endCaptures": {
+                                "1": {
+                                    "name": "punctuation.separator.key-value.tss"
+                                }
+                            }
+                        }, 
+                        {
+                            "match": "\\b(portrait|landscape|progressive|interlace)", 
+                            "name": "support.constant.property-value.tss"
+                        }, 
+                        {
+                            "captures": {
+                                "1": {
+                                    "name": "constant.numeric.tss"
+                                }, 
+                                "2": {
+                                    "name": "keyword.operator.arithmetic.tss"
+                                }, 
+                                "3": {
+                                    "name": "constant.numeric.tss"
+                                }
+                            }, 
+                            "match": "\\s*(\\d+)(/)(\\d+)"
+                        }, 
+                        {
+                            "include": "#numeric-values"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        "media-query-list": {
+            "begin": "\\s*(?=[^{;])", 
+            "end": "\\s*(?=[{;])", 
+            "patterns": [
+                {
+                    "include": "#media-query"
+                }
+            ]
+        }, 
+        "numeric-values": {
+            "patterns": [
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.constant.tss"
+                        }
+                    }, 
+                    "match": "(#)([0-9a-fA-F]{3}|[0-9a-fA-F]{6})\\b", 
+                    "name": "constant.other.color.rgb-value.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.unit.tss"
+                        }
+                    }, 
+                    "match": "(?x)\n\t\t\t\t\t    (?:-|\\+)?(?:(?:[0-9]+(?:\\.[0-9]+)?)|(?:\\.[0-9]+))\n\t\t\t\t\t    ((?:px|pt|ch|cm|mm|in|r?em|ex|pc|deg|g?rad|dpi|dpcm|s)\\b|%)?\n\t\t\t\t\t", 
+                    "name": "constant.numeric.tss"
+                }
+            ]
+        }, 
+        "property-values": {
+            "patterns": [
+                {
+                    "match": "\\b(absolute|all(-scroll)?|always|armenian|auto|avoid|baseline|below|bidi-override|block|bold|bolder|both|bottom|break-all|break-word|capitalize|center|char|circle|cjk-ideographic|col-resize|collapse|crosshair|dashed|decimal-leading-zero|decimal|default|disabled|disc|distribute-all-lines|distribute-letter|distribute-space|distribute|dotted|double|e-resize|ellipsis|fixed|geometricPrecision|georgian|groove|hand|hebrew|help|hidden|hiragana-iroha|hiragana|horizontal|ideograph-alpha|ideograph-numeric|ideograph-parenthesis|ideograph-space|inactive|inherit|inline-block|inline|inset|inside|inter-ideograph|inter-word|italic|justify|katakana-iroha|katakana|keep-all|left|lighter|line-edge|line-through|line|list-item|loose|lower-alpha|lower-greek|lower-latin|lower-roman|lowercase|lr-tb|ltr|medium|middle|move|n-resize|ne-resize|newspaper|no-drop|no-repeat|nw-resize|none|normal|not-allowed|nowrap|oblique|optimize(Legibility|Quality|Speed)|outset|outside|overline|pointer|pre(-(wrap|line))?|progress|relative|repeat-x|repeat-y|repeat|right|ridge|row-resize|rtl|s-resize|scroll|se-resize|separate|small-caps|solid|square|static|strict|sub|super|sw-resize|table-footer-group|table-header-group|tb-rl|text-bottom|text-top|text|thick|thin|top|transparent|underline|upper-alpha|upper-latin|upper-roman|uppercase|vertical(-(ideographic|text))?|visible(Painted|Fill|Stroke)?|w-resize|wait|whitespace|zero|smaller|larger|((xx?-)?(small|large))|painted|fill|stroke)\\b", 
+                    "name": "support.constant.property-value.tss"
+                }, 
+                {
+                    "match": "(\\b(?i:arial|century|comic|courier|garamond|georgia|helvetica|impact|lucida|symbol|system|tahoma|times|trebuchet|utopia|verdana|webdings|sans-serif|serif|monospace)\\b)", 
+                    "name": "support.constant.font-name.tss"
+                }, 
+                {
+                    "include": "#numeric-values"
+                }, 
+                {
+                    "include": "#color-values"
+                }, 
+                {
+                    "include": "#string-double"
+                }, 
+                {
+                    "include": "#string-single"
+                },
+                { 
+                    "include": "#rule-list" 
+                },
+                {
+                    "begin": "(rect)\\s*(\\()", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "support.function.misc.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "end": "(\\))", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "patterns": [
+                        {
+                            "include": "#numeric-values"
+                        }
+                    ]
+                }, 
+                {
+                    "begin": "(format|local|url|attr|counter|counters)\\s*(\\()", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "support.function.misc.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "end": "(\\))", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "patterns": [
+                        {
+                            "include": "#string-single"
+                        }, 
+                        {
+                            "include": "#string-double"
+                        }, 
+                        {
+                            "match": "[^'\") \\t]+", 
+                            "name": "variable.parameter.misc.tss"
+                        }
+                    ]
+                }, 
+                {
+                    "match": "\\!\\s*important", 
+                    "name": "keyword.other.important.tss"
+                }
+            ]
+        }, 
+        "rule-list": {
+            "begin": "\\{", 
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.section.property-list.tss"
+                }
+            }, 
+            "end": "(?=\\s*\\},?)", 
+            "name": "meta.property-list.tss", 
+            "patterns": [
+                {
+                    "include": "#comment-block"
+                }, 
+                {
+                    "include": "#comment-line"
+                }, 
+                {
+                    "begin": "(?<![-a-z])(?=[-a-z])", 
+                    "end": "$|(?![-a-z])", 
+                    "name": "meta.property-name.tss", 
+                    "patterns": [
+                        {
+                            "match": "\\b(endPlaybackTime|code|keyboardToolbarHeight|magneticHeading|clipViews|tabsBackgroundSelectedColor|prefix|minAge|country_code|checkable|horizontalMargin|rightNavButton|tx|ty|hitRect|sourceLength|startRadius|selectedThumbImage|useApplicationAudioSession|tabBarHidden|showAppOnTrayClick|suppressReturn|tabHeight|audioSessionMode|mediaControlStyle|backgroundGradient|maxLength|exact|anchorPoint|accessToken|rightImage|passwordMask|posts|movieControlMode|showScrollbars|defaults|activeTabBackgroundDisabledImage|systemButton|allowEditing|windowPixelFormat|returnKeyType|submitEnabled|scalesPageToFit|street|exitOnClose|port|friend_requests|verticalBounce|index|backfillEnd|opaque|backgroundRepeat|selected|m33|m32|m31|shadowColor|longitudeDelta|backgroundColor|maximumHeadingAge|localName|badge|method|pincolor|street1|defaultImage|rightTrackTopCap|willHandleTouches|userInfo|address|active|path|toolbar|hasChild|verticalAlign|items|tabDividerWidth|action|options|leftNavButton|activeTabBackgroundImage|rightButtonPadding|allowsSelection|borderRadius|search|showHorizontalScrollIndicator|alertAction|visible|loggedIn|backgroundDisabledImage|autohide|composer|prompt|activeTabBackgroundSelectedColor|bytesProcessed|logicalDensityFactor|appSupportsShakeToEdit|type|annotations|deviceToken|platformHeight|keyboardToolbarColor|editable|phone|availableCameraMediaTypes|minDate|backgroundDisabledColor|currentPlaybackTime|longitude|selectionStyle|accessibilityHidden|pinImage|initialPlaybackTime|iconified|showTrayNotificationsWhenFocused|enableZoomControls|scrollingEnabled|paused|xdpi|region2|showBookmark|platformWidth|disableBounce|charset|keepScreenOn|mediaType|delay|backgroundImage|backgroundFocusedColor|jobTitle|cacheSize|activeTabBackgroundFocusedImage|max|autoreverse|tabsBackgroundSelectedImage|birthday|pluginState|date|accessibilityValue|destructive|data|types|forwardGeocoderTimeout|autoLink|showVerticalScrollIndicator|organization|rowHeight|canDelete|hideAnnotationWhenTouchMap|leftButton|stripTerminator|callback|region1|tabsAtBottom|backButtonTitleImage|manualMode|contentURL|backgroundPaddingLeft|updateCurrentIntent|leftTrackLeftCap|looping|deleteIntent|rightView|style|countDownDuration|overlayEnabled|albumTitle|recordId|ip_address|firstPhonetic|window|albumArtist|preferredProvider|latitude|hidden|launchOptionsLocationKey|borderBottom|ellipsize|views|timestamp|postalCode|activityExitAnimation|disabledThumbImage|textAlign|permissions|name|onPrepareOptionsMenu|separatorColor|mode|timeout|debug|chat_groups|domain|keyboardType|highlightedRightTrackImage|verticalMargin|navBarAtTop|meta|tabsBackgroundFocusedImage|horizontalWrap|horizontalBounce|event_occurrences|selectedProperty|requestCode|titlepromptid|minUpdateDistance|modalTransitionStyle|textid|audioStreamType|maximumLocationAge|activeTabBackgroundDisabledColor|actionView|totalBytesProcessed|rect|compression|maxRange|fontStyle|isLocal|rowCount|m24|lastName|alertLaunchImage|transition|messages|m21|m22|m23|contentText|length|leftButtonMode|minZoomScale|view|showCalibration|purpose|pagingControlHeight|suffix|highlightedColor|number|titleid|classname|saveToPhotoGallery|accessibilityHint|expirationDate|hideLoadIndicator|message|borderColor|city|checked|top|listenQueueSize|selectedImage|footerTitle|bitRate|a|titleControl|selectedLeftTrackImage|decodeRetries|isSearching|canScale|keyvalues|availablePhotoGalleryMediaTypes|tabsBackgroundDisabledImage|animationStyle|kind|b|selectedRow|locationServicesAuthorization|enabled|idleTimerDisabled|scrollType|rightTrackLeftCap|chats|tabs|maxDate|adSize|fontFamily|rightButtonMode|trueHeading|yOffset|layoutId|min|zipcode|disabledRightTrackImage|note|okid|selectedPerson|activeTabBackgroundFocusedColor|accuracy|hires|buffer|toRecipients|zIndex|fontWeight|connected|moveable|minUpdateTime|icon|validatesSecureCertificate|naturalSize|backgroundPaddingRight|url|lastPhonetic|uri|onsendstream|sourcePosition|sessionId|points|highlightedThumbImage|autoplay|iconifiedByDefault|m34|allowMultipleSelections|text|labels|leftTrackTopCap|colors|messageid|userAgent|font|errorState|layout|title|cache|selectedBackgroundImage|proximityDetection|titleOff|columns|middlePhonetic|thumbImage|permission|errorDescription|subtitleid|backgroundFocusedImage|hintText|hinttextid|tlsVersion|firstName|barImage|artist|fields|popoverView|borderWidth|activity|x|dpi|useSecure|videoQuality|locale|result|resultCode|searchAsChild|rightTrackImage|subject|pagingControlTimeout|fullscreen|isCompilation|speed|scrollsToTop|distanceFilter|tabsBackgroundColor|heading|repeatMode|fontSize|filterAttribute|minimumFontSize|progress|disableNetworkActivityIndicator|filterCaseInsensitive|email|byteOrder|backgroundSelectedImage|hideSearchOnSelection|leftTrackImage|clearOnEdit|separatorStyle|genre|shadowOffset|activeTabBackgroundColor|c|contentIntent|reverse|masterView|footerView|country|packageName|paddingLeft|selectedRightTrackImage|orientationModes|toStream|headerView|subtitle|allowsAirPlay|color|shuffleMode|relatedNames|maxAge|pagingControlColor|height|m11|zoomScale|m13|m12|m14|cancel|statusBarStyle|contentHeight|tint|wobble|autocorrect|indicatorDiameter|minRowHeight|tabDividerColor|enableReturnKey|selectedIndex|username|minuteInterval|inbound|lastInsertRowId|photos|showCancel|representative|videoMaximumDuration|navBarHidden|detailView|sound|leftImage|appearance|backgroundPaddingBottom|value|className|reviews|httpURLFormatter|bccRecipients|error|cancelled|borderStyle|animated|searchHidden|region|xOffset|titleImage|orientation|countryCode|repeatCount|mediaTypes|allowsSelectionDuringEditing|bufferSize|cropRect|ledOffMS|ccRecipients|minRange|media|format|html|statusBarHidden|titlePrompt|events|serviceType|leftButtonPadding|isValid|highlightedLeftTrackImage|arrowDirection|tickerText|useSpinner|nickname|autoEncodeUrl|ledARGB|center|titleCondensed|format24|draggable|showPagingControl|flags|y|position|paddingRight|left|showMasterInPortrait|modalStyle|backgroundSelectedColor|leftView|tabsBackgroundImage|errorCode|file|startPoint|onload|windowSoftInputMode|loading|density|middleName|editButtonTitle|source|collections|location|currentPage|remoteBackup|promptid|dest|messageBody|contentTitle|department|titleOn|accepted|checkins|ydpi|translucent|pagingControlAlpha|availablePhotoMediaTypes|barColor|rotate|d|success|m42|m43|m41|m44|regionFit|locationTimeout|autocapitalization|coords|autorotate|appid|keyboardToolbar|allowBackground|onreadystatechange|currentTab|grouping|enableKeepAlive|right|rightButton|hasCheck|activeTab|moving|androidView|accessibilityLabel|backgroundPaddingTop|images|contentWidth|animate|softKeyboardOnFocus|sourceType|userLocation|scale|overlay|destPosition|allowUserCustomization|mapType|provider|endRadius|headerPullView|power|host|offset|ok|socket|headerTitle|selectedColor|backfillStart|onCreateOptionsMenu|tabsBackgroundFocusedColor|modal|showTrayNotification|buttonNames|image|hostName|preventDefaultImage|cancelable|endPoint|activityEnterAnimation|reverseGeocoderTimeout|displayAddress|instantMessage|rowsAffected|backgroundTopCap|headingFilter|bubbleParent|altitude|transform|backButtonTitle|latitudeDelta|width|inPopOver|scrollIndicatorStyle|sections|files|indicatorColor|volume|ledOnMS|batteryMonitoring|maxRowHeight|borderTop|editing|averageMicrophonePower|withCredentials|scrollable|places|pagingControlOnTop|focusAppOnPush|frequency|activeTabBackgroundSelectedImage|z|columnCount|uid|onerror|curve|alertBody|duration|contentOffset|wordWrap|appBadge|touchEnabled|timezone|showControls|statuses|expiresIn|password|canCancelEvents|trackSignificantLocationChange|hasDetail|when|clearButtonMode|autoRedirect|acls|disabledLeftTrackImage|backgroundLeftCap|altitudeAccuracy|startMode|opacity|repeat|users|ondatastream|focusable|fromStream|persistent|tabsBackgroundDisabledColor|maxZoomScale|intent|visibleItems|cancelBubble|selectionIndicator|bottom|mask|scalingMode|nodeValue|selectedBackgroundColor|indentionLevel|time|forceDialogAuth)\\b", 
+                            "name": "support.type.property-name.tss"
+                        }
+                    ]
+                }, 
+                {
+                    "begin": "(:)\\s*", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.separator.key-value.tss"
+                        }
+                    }, 
+                    "end": "\\s*(,?\\n|(\\},?))", 
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.terminator.rule.tss"
+                        }
+                    }, 
+                    "name": "meta.property-value.tss", 
+                    "patterns": [
+                        {
+                            "include": "#property-values"
+                        }
+                    ]
+                }
+            ]
+        }, 
+        "selector": {
+            "begin": "\\s*(?=[\\\":.*'#a-zA-Z])", 
+            "end": "(?=[/@{)])", 
+            "name": "meta.selector.tss", 
+            "patterns": [
+                {
+                    "match" : "\\b(2DMatrix|3DMatrix|ActivityIndicator|AlertDialog|Animation|Button|ButtonBar|CoverFlowView|DashboardItem|DashboardView|EmailDialog|ImageView|Label|MaskedImage|Notification|OptionDialog|Picker|PickerColumn|PickerRow|ProgressBar|ScrollableView|ScrollView|SearchBar|Slider|Switch|Tab|TabbedBar|TabGroup|TableView|TableViewRow|TableViewSection|TextArea|TextField|Toolbar|View|WebView|Window|)\\b *(\\[.*\\])*", 
+                    "name": "entity.name.tag.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }
+                    }, 
+                    "match": "(\\.)[a-zA-Z0-9_-]+ *(\\[.*\\])*", 
+                    "name": "entity.other.attribute-name.class.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }
+                    }, 
+                    "match": "(#)[a-zA-Z][a-zA-Z0-9_-]* *(\\[.*\\])*", 
+                    "name": "entity.other.attribute-name.id.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }
+                    }, 
+                    "match": "(:+)(after|before|first-letter|first-line|selection)\\b", 
+                    "name": "entity.other.attribute-name.pseudo-element.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }
+                    }, 
+                    "match": "(:)((first|last)-child|(first|last|only)-of-type|empty|root|target|first|left|right)\\b", 
+                    "name": "entity.other.attribute-name.pseudo-class.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }
+                    }, 
+                    "match": "(:)(checked|enabled|default|disabled|indeterminate|invalid|optional|required|valid)\\b", 
+                    "name": "entity.other.attribute-name.pseudo-class.ui-state.tss"
+                }, 
+                {
+                    "begin": "((:)not)(\\()", 
+                    "beginCaptures": {
+                        "1": {
+                            "name": "entity.other.attribute-name.pseudo-class.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.definition.entity.tss"
+                        }, 
+                        "3": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "end": "\\)", 
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "patterns": [
+                        {
+                            "include": "#selector"
+                        }
+                    ]
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "entity.other.attribute-name.pseudo-class.tss"
+                        }, 
+                        "2": {
+                            "name": "punctuation.definition.entity.tss"
+                        }, 
+                        "3": {
+                            "name": "punctuation.section.function.tss"
+                        }, 
+                        "4": {
+                            "name": "constant.numeric.tss"
+                        }, 
+                        "5": {
+                            "name": "punctuation.section.function.tss"
+                        }
+                    }, 
+                    "match": "((:)nth-(?:(?:last-)?child|(?:last-)?of-type))(\\()(\\-?(?:\\d+n?|n)(?:\\+\\d+)?|even|odd)(\\))"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }
+                    }, 
+                    "match": "(:)(active|hover|link|visited|focus)\\b", 
+                    "name": "entity.other.attribute-name.pseudo-class.tss"
+                }, 
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.entity.tss"
+                        }, 
+                        "2": {
+                            "name": "entity.other.attribute-name.attribute.tss"
+                        }, 
+                        "3": {
+                            "name": "punctuation.separator.operator.tss"
+                        }, 
+                        "4": {
+                            "name": "string.unquoted.attribute-value.tss"
+                        }, 
+                        "5": {
+                            "name": "string.quoted.double.attribute-value.tss"
+                        }, 
+                        "6": {
+                            "name": "punctuation.definition.string.begin.tss"
+                        }, 
+                        "7": {
+                            "name": "punctuation.definition.string.end.tss"
+                        }
+                    }, 
+                    "match": "(?i)(\\[)\\s*(-?[_a-z\\\\[[:^ascii:]]][_a-z0-9\\-\\\\[[:^ascii:]]]*)(?:\\s*([~|^$*]?=)\\s*(?:(-?[_a-z\\\\[[:^ascii:]]][_a-z0-9\\-\\\\[[:^ascii:]]]*)|((?>(['\"])(?:[^\\\\]|\\\\.)*?(\\6)))))?\\s*(\\])", 
+                    "name": "meta.attribute-selector.tss"
+                }
+            ]
+        }, 
+        "string-double": {
+            "begin": "\"", 
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.tss"
+                }
+            }, 
+            "end": "\"", 
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.tss"
+                }
+            }, 
+            "name": "string.quoted.double.tss", 
+            "patterns": [
+                {
+                    "match": "\\\\.", 
+                    "name": "constant.character.escape.tss"
+                }
+            ]
+        }, 
+        "string-single": {
+            "begin": "'", 
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.tss"
+                }
+            }, 
+            "end": "'", 
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.tss"
+                }
+            }, 
+            "name": "string.quoted.single.tss", 
+            "patterns": [
+                {
+                    "match": "\\\\.", 
+                    "name": "constant.character.escape.tss"
+                }
+            ]
+        }
+    }, 
+    "scopeName": "source.tss", 
+    "uuid": "69AA0917-B7BB-11D9-A7E2-000D93C8BE28"
+}

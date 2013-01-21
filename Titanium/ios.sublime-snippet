@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+[platform=ios]
+]]></content>
+<tabTrigger>ios</tabTrigger>
+<scope>meta.selector.tss</scope>
+</snippet>
